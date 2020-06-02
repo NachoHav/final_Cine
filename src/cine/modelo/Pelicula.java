@@ -5,18 +5,17 @@ import java.time.LocalDate;
 
 
 public class Pelicula {
-    Sala sala;
-    private boolean butaca = true;
+    private Sala sala;
+    private String nombre;
     private LocalDate fechaYHora;
-    private float montoEntrada;
-
+    
     public Pelicula() {
     }
 
-    public Pelicula(Sala sala, LocalDate fechaYHora, float montoEntrada) {
+    public Pelicula(Sala sala, String nombre, LocalDate fechaYHora) {
         this.sala = sala;
+        this.nombre = nombre;
         this.fechaYHora = fechaYHora;
-        this.montoEntrada = montoEntrada;
     }
 
     public Sala getSala() {
@@ -27,12 +26,12 @@ public class Pelicula {
         this.sala = sala;
     }
 
-    public boolean isButaca() {
-        return butaca;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setButaca(boolean butaca) {
-        this.butaca = butaca;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public LocalDate getFechaYHora() {
@@ -43,13 +42,7 @@ public class Pelicula {
         this.fechaYHora = fechaYHora;
     }
 
-    public float getMontoEntrada() {
-        return montoEntrada;
-    }
-
-    public void setMontoEntrada(float montoEntrada) {
-        this.montoEntrada = montoEntrada;
-    }
+    
     
     
 }
