@@ -21,11 +21,10 @@ public class Ticket {
     
     public Ticket(){}
 
-    public Ticket(Sala sala, Pelicula pelicula,/*Butaca butaca*/ LocalDate horario, double monto) {
+    public Ticket(Sala sala, Pelicula pelicula,/*Butaca butaca*/ double monto) {
         this.sala = sala;
         this.pelicula = pelicula;
 //        this.butaca = butaca;
-        this.horario = horario;
         this.monto = monto;
     }
 
