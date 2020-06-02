@@ -15,15 +15,17 @@ public class Ticket {
     
     private Sala sala;
     private Pelicula pelicula;
+    private Cliente cliente;
 //    private Butaca butaca;
     private LocalDate horario;
     private double monto;
     
     public Ticket(){}
 
-    public Ticket(Sala sala, Pelicula pelicula,/*Butaca butaca*/ double monto) {
+    public Ticket(Sala sala, Pelicula pelicula, Cliente cliente,/*Butaca butaca*/ double monto) {
         this.sala = sala;
         this.pelicula = pelicula;
+        this.cliente = cliente;
 //        this.butaca = butaca;
         this.monto = monto;
     }
@@ -52,6 +54,18 @@ public class Ticket {
     public void setMonto(double monto) {
         this.monto = monto;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
+  
+
+    }
+    
     
     
 }
