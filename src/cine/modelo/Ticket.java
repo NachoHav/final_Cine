@@ -62,10 +62,10 @@ public class Ticket {
         this.cliente = cliente;
     }
     
-  
 
-    }
-    
-    
-    
+
 }
+    
+
+    
+
