@@ -17,6 +17,14 @@ public class Cliente {
         this.apellido = apellido;
     }
 
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
     public long getDni() {
         return dni;
     }

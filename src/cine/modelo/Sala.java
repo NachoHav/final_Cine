@@ -21,6 +21,14 @@ public class Sala {
         this.ubicacion = ubicacion;
     }
 
+    public int getIdSala() {
+        return idSala;
+    }
+
+    public void setIdSala(int idSala) {
+        this.idSala = idSala;
+    }
+    
     public String getUbicacion() {
         return ubicacion;
     }
