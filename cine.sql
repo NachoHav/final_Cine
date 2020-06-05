@@ -1,140 +1,254 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         10.1.9-MariaDB-log - mariadb.org binary distribution
--- SO del servidor:              Win32
--- HeidiSQL Versión:             9.3.0.4984
--- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:3306
+-- Generation Time: Jun 05, 2020 at 08:40 AM
+-- Server version: 10.1.9-MariaDB-log
+-- PHP Version: 5.6.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Volcando estructura de base de datos para cine
-CREATE DATABASE IF NOT EXISTS `cine` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `cine`;
+--
+-- Database: `cine`
+--
 
+-- --------------------------------------------------------
 
--- Volcando estructura para tabla cine.butaca
-CREATE TABLE IF NOT EXISTS `butaca` (
-  `idButaca` int(11) NOT NULL AUTO_INCREMENT,
-  `idSala` int(11) NOT NULL DEFAULT '0',
-  `fila` varchar(50) DEFAULT NULL,
-  `columna` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`idButaca`),
-  KEY `FK_butaca_butaca` (`idSala`),
-  CONSTRAINT `FK_butaca_butaca` FOREIGN KEY (`idSala`) REFERENCES `sala` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+--
+-- Table structure for table `butaca`
+--
 
--- Volcando datos para la tabla cine.butaca: ~12 rows (aproximadamente)
-/*!40000 ALTER TABLE `butaca` DISABLE KEYS */;
+CREATE TABLE `butaca` (
+  `idButaca` int(11) NOT NULL,
+  `idSala` int(11) NOT NULL,
+  `fila` varchar(50) NOT NULL,
+  `columna` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `butaca`
+--
+
 INSERT INTO `butaca` (`idButaca`, `idSala`, `fila`, `columna`) VALUES
-	(1, 1, 'A', '1'),
-	(2, 1, 'A', '2'),
-	(3, 1, 'A', '3'),
-	(4, 1, 'B', '1'),
-	(5, 1, 'B', '2'),
-	(6, 1, 'B', '3'),
-	(7, 2, 'A', '1'),
-	(8, 2, 'A', '2'),
-	(9, 2, 'A', '3'),
-	(10, 2, 'B', '1'),
-	(11, 2, 'B', '2'),
-	(12, 2, 'B', '3');
-/*!40000 ALTER TABLE `butaca` ENABLE KEYS */;
+(1, 1, 'A', '1'),
+(2, 1, 'A', '2'),
+(3, 1, 'A', '3'),
+(4, 1, 'B', '1'),
+(5, 1, 'B', '2'),
+(6, 1, 'B', '3'),
+(7, 2, 'A', '1'),
+(8, 2, 'A', '2'),
+(9, 2, 'A', '3'),
+(10, 2, 'B', '1'),
+(11, 2, 'B', '2'),
+(12, 2, 'B', '3');
 
+-- --------------------------------------------------------
 
--- Volcando estructura para tabla cine.cliente
-CREATE TABLE IF NOT EXISTS `cliente` (
-  `idCliente` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL DEFAULT '0',
-  `apellido` varchar(50) NOT NULL DEFAULT '0',
-  `dni` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`idCliente`)
+--
+-- Table structure for table `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `dni` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cine.cliente: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `pelicula`
+--
 
--- Volcando estructura para tabla cine.pelicula
-CREATE TABLE IF NOT EXISTS `pelicula` (
-  `idPelicula` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`idPelicula`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `pelicula` (
+  `idPelicula` int(11) NOT NULL,
+  `titulo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cine.pelicula: ~3 rows (aproximadamente)
-/*!40000 ALTER TABLE `pelicula` DISABLE KEYS */;
+--
+-- Dumping data for table `pelicula`
+--
+
 INSERT INTO `pelicula` (`idPelicula`, `titulo`) VALUES
-	(1, 'Terminator'),
-	(2, 'Eterno Resplandor de una Mente sin Recuerdos'),
-	(3, 'Titanic 2');
-/*!40000 ALTER TABLE `pelicula` ENABLE KEYS */;
+(1, 'Terminator'),
+(2, 'Eterno Resplandor de una Mente sin Recuerdos'),
+(3, 'Titanic 2');
 
+-- --------------------------------------------------------
 
--- Volcando estructura para tabla cine.proyeccion
-CREATE TABLE IF NOT EXISTS `proyeccion` (
-  `idProyeccion` int(11) NOT NULL AUTO_INCREMENT,
-  `idPelicula` int(11) NOT NULL DEFAULT '0',
-  `idSala` int(11) NOT NULL DEFAULT '0',
-  `horario_desde` varchar(50) NOT NULL DEFAULT '0',
-  `horario_hasta` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`idProyeccion`),
-  KEY `FK_horario_pelicula` (`idPelicula`),
-  KEY `FK_horario_sala` (`idSala`),
-  CONSTRAINT `FK_horario_pelicula` FOREIGN KEY (`idPelicula`) REFERENCES `pelicula` (`idPelicula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_horario_sala` FOREIGN KEY (`idSala`) REFERENCES `sala` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+--
+-- Table structure for table `proyeccion`
+--
 
--- Volcando datos para la tabla cine.proyeccion: ~4 rows (aproximadamente)
-/*!40000 ALTER TABLE `proyeccion` DISABLE KEYS */;
-INSERT INTO `proyeccion` (`idProyeccion`, `idPelicula`, `idSala`, `horario_desde`, `horario_hasta`) VALUES
-	(1, 1, 1, '22:00 hs', '24:00 hs'),
-	(2, 1, 2, '22:00 hs', '24:00 hs'),
-	(3, 2, 1, '17:00 hs', '20:30 hs'),
-	(4, 3, 2, '15:00 hs', '18:00 hs');
-/*!40000 ALTER TABLE `proyeccion` ENABLE KEYS */;
-
-
--- Volcando estructura para tabla cine.sala
-CREATE TABLE IF NOT EXISTS `sala` (
-  `idSala` int(11) NOT NULL AUTO_INCREMENT,
-  `ubicacion` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`idSala`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
--- Volcando datos para la tabla cine.sala: ~2 rows (aproximadamente)
-/*!40000 ALTER TABLE `sala` DISABLE KEYS */;
-INSERT INTO `sala` (`idSala`, `ubicacion`) VALUES
-	(1, 'Pasillo central, puerta derecha.'),
-	(2, 'Pasillo central, puerta izquierda.');
-/*!40000 ALTER TABLE `sala` ENABLE KEYS */;
-
-
--- Volcando estructura para tabla cine.ticket
-CREATE TABLE IF NOT EXISTS `ticket` (
-  `idTicket` int(11) NOT NULL AUTO_INCREMENT,
-  `idCliente` int(11) NOT NULL DEFAULT '0',
-  `idProyeccion` int(11) NOT NULL DEFAULT '0',
-  `IdButaca` int(11) NOT NULL DEFAULT '0',
-  `fecha_ticket` datetime NOT NULL,
-  `monto` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `estado` tinyint(4) NOT NULL DEFAULT '0',
-  `metodo_pago` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`idTicket`),
-  KEY `FK_ticket_cliente` (`idCliente`),
-  KEY `FK_ticket_horario` (`idProyeccion`),
-  KEY `FK_ticket_butaca` (`IdButaca`),
-  CONSTRAINT `FK_ticket_butaca` FOREIGN KEY (`IdButaca`) REFERENCES `butaca` (`idButaca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ticket_cliente` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_ticket_horario` FOREIGN KEY (`idProyeccion`) REFERENCES `proyeccion` (`idProyeccion`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `proyeccion` (
+  `idProyeccion` int(11) NOT NULL,
+  `idPelicula` int(11) NOT NULL,
+  `idSala` int(11) NOT NULL,
+  `horario_desde` varchar(50) NOT NULL,
+  `horario_hasta` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Volcando datos para la tabla cine.ticket: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+--
+-- Dumping data for table `proyeccion`
+--
+
+INSERT INTO `proyeccion` (`idProyeccion`, `idPelicula`, `idSala`, `horario_desde`, `horario_hasta`) VALUES
+(1, 1, 1, '22:00 hs', '24:00 hs'),
+(2, 1, 2, '22:00 hs', '24:00 hs'),
+(3, 2, 1, '17:00 hs', '20:30 hs'),
+(4, 3, 2, '15:00 hs', '18:00 hs');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sala`
+--
+
+CREATE TABLE `sala` (
+  `idSala` int(11) NOT NULL,
+  `ubicacion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sala`
+--
+
+INSERT INTO `sala` (`idSala`, `ubicacion`) VALUES
+(1, 'Pasillo central, puerta derecha.'),
+(2, 'Pasillo central, puerta izquierda.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ticket`
+--
+
+CREATE TABLE `ticket` (
+  `idTicket` int(11) NOT NULL,
+  `idCliente` int(11) NOT NULL,
+  `idProyeccion` int(11) NOT NULL,
+  `idButaca` int(11) NOT NULL,
+  `fecha_ticket` datetime NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `estado` tinyint(4) NOT NULL,
+  `metodo_pago` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `butaca`
+--
+ALTER TABLE `butaca`
+  ADD PRIMARY KEY (`idButaca`),
+  ADD KEY `idSala` (`idSala`);
+
+--
+-- Indexes for table `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`);
+
+--
+-- Indexes for table `pelicula`
+--
+ALTER TABLE `pelicula`
+  ADD PRIMARY KEY (`idPelicula`);
+
+--
+-- Indexes for table `proyeccion`
+--
+ALTER TABLE `proyeccion`
+  ADD PRIMARY KEY (`idProyeccion`),
+  ADD KEY `idPelicula` (`idPelicula`),
+  ADD KEY `idSala` (`idSala`);
+
+--
+-- Indexes for table `sala`
+--
+ALTER TABLE `sala`
+  ADD PRIMARY KEY (`idSala`);
+
+--
+-- Indexes for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD PRIMARY KEY (`idTicket`),
+  ADD KEY `idCliente` (`idCliente`),
+  ADD KEY `idProyeccion` (`idProyeccion`),
+  ADD KEY `idButaca` (`idButaca`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `butaca`
+--
+ALTER TABLE `butaca`
+  MODIFY `idButaca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pelicula`
+--
+ALTER TABLE `pelicula`
+  MODIFY `idPelicula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `proyeccion`
+--
+ALTER TABLE `proyeccion`
+  MODIFY `idProyeccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `sala`
+--
+ALTER TABLE `sala`
+  MODIFY `idSala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `ticket`
+--
+ALTER TABLE `ticket`
+  MODIFY `idTicket` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `butaca`
+--
+ALTER TABLE `butaca`
+  ADD CONSTRAINT `butaca_ibfk_1` FOREIGN KEY (`idSala`) REFERENCES `sala` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `proyeccion`
+--
+ALTER TABLE `proyeccion`
+  ADD CONSTRAINT `proyeccion_ibfk_1` FOREIGN KEY (`idPelicula`) REFERENCES `pelicula` (`idPelicula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `proyeccion_ibfk_2` FOREIGN KEY (`idSala`) REFERENCES `sala` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`idProyeccion`) REFERENCES `proyeccion` (`idProyeccion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ticket_ibfk_3` FOREIGN KEY (`idButaca`) REFERENCES `butaca` (`idButaca`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
