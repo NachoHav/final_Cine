@@ -5,42 +5,25 @@ import java.time.LocalDate;
 
 
 public class Pelicula {
-    private Sala sala;
-    private String nombre;
-    private LocalDate fechaYHora;
-    
+
+    private String titulo;
+
     public Pelicula() {
     }
 
-    public Pelicula(Sala sala, String nombre, LocalDate fechaYHora) {
-        this.sala = sala;
-        this.nombre = nombre;
-        this.fechaYHora = fechaYHora;
+    public Pelicula(String titulo) {
+        this.titulo = titulo;
     }
 
-    public Sala getSala() {
-        return sala;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public LocalDate getFechaYHora() {
-        return fechaYHora;
-    }
-
-    public void setFechaYHora(LocalDate fechaYHora) {
-        this.fechaYHora = fechaYHora;
-    }
+    
+    
 
     
     

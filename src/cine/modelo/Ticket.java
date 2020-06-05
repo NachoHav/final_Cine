@@ -1,66 +1,89 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cine.modelo;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author Pablo
- */
+
 public class Ticket {
     
-    private Sala sala;
-    private Pelicula pelicula;
     private Cliente cliente;
-//    private Butaca butaca;
-    private LocalDate horario;
+    private Proyeccion proyeccion;
+    private Butaca butaca;
+    private LocalDate fecha_ticket;
     private double monto;
-    
-    public Ticket(){}
+    private boolean estado;
+    private String metodo_pago;
 
-    public Ticket(Sala sala, Pelicula pelicula, Cliente cliente,/*Butaca butaca*/ double monto) {
-        this.sala = sala;
-        this.pelicula = pelicula;
+    public Ticket() {
+    }
+
+    public Ticket(Cliente cliente, Proyeccion proyeccion, Butaca butaca, LocalDate fecha_ticket, double monto, boolean estado, String metodo_pago) {
         this.cliente = cliente;
-//        this.butaca = butaca;
+        this.proyeccion = proyeccion;
+        this.butaca = butaca;
+        this.fecha_ticket = fecha_ticket;
         this.monto = monto;
-    }
-
-    public Sala getSala() {
-        return sala;
-    }
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }
-
-    public Pelicula getPelicula() {
-        return pelicula;
-    }
-    public void setPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
-    }
-
-    public LocalDate getHorario() {
-        return pelicula.getFechaYHora();
-    }
-
-    public double getMonto() {
-        return monto;
-    }
-    public void setMonto(double monto) {
-        this.monto = monto;
+        this.estado = estado;
+        this.metodo_pago = metodo_pago;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Proyeccion getProyeccion() {
+        return proyeccion;
+    }
+
+    public void setProyeccion(Proyeccion proyeccion) {
+        this.proyeccion = proyeccion;
+    }
+
+    public Butaca getButaca() {
+        return butaca;
+    }
+
+    public void setButaca(Butaca butaca) {
+        this.butaca = butaca;
+    }
+
+    public LocalDate getFecha_ticket() {
+        return fecha_ticket;
+    }
+
+    public void setFecha_ticket(LocalDate fecha_ticket) {
+        this.fecha_ticket = fecha_ticket;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public String getMetodo_pago() {
+        return metodo_pago;
+    }
+
+    public void setMetodo_pago(String metodo_pago) {
+        this.metodo_pago = metodo_pago;
+    }
+    
+    
     
 
 

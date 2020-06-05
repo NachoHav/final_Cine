@@ -10,5 +10,22 @@ package cine.modelo;
  * @author nacho
  */
 public class Sala {
+    private String ubicacion;
+
+    public Sala() {
+    }
+
+    public Sala(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+    
     
 }
