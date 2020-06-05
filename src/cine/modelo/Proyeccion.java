@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 
 public class Proyeccion {
+    private int idProyeccion;
     private Pelicula pelicula;
     private Sala sala;
     

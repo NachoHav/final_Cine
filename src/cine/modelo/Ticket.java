@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 
 public class Ticket {
-    
+    private int idTicket;
     private Cliente cliente;
     private Proyeccion proyeccion;
     private Butaca butaca;

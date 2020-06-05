@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class Pelicula {
 
+    private int idPelicula;
     private String titulo;
 
     public Pelicula() {

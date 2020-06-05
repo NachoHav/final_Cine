@@ -10,6 +10,8 @@ package cine.modelo;
  * @author nacho
  */
 public class Sala {
+    
+    private int idSala;
     private String ubicacion;
 
     public Sala() {

@@ -3,6 +3,8 @@ package cine.modelo;
 
 
 public class Butaca {
+    
+    private int idButaca;
     private Sala sala;
     private int fila, columna;
 
