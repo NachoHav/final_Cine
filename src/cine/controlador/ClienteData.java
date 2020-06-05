@@ -55,7 +55,7 @@ public class ClienteData {
     public void bajaCliente(int id){
         
         try {
-            String sql = "DELETE FROM ALUMNO WHERE idCliente = ?;";
+            String sql = "DELETE FROM CLIENTE WHERE idCliente = ?;";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
