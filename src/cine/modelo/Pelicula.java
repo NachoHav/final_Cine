@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Pelicula {
 
-    private int idPelicula;
+    private int idPelicula = -1;
     private String titulo;
 
     public Pelicula() {

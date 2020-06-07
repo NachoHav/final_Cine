@@ -4,14 +4,14 @@ package cine.modelo;
 
 public class Butaca {
     
-    private int idButaca;
+    private int idButaca = -1;
     private Sala sala;
-    private int fila, columna;
+    private String fila, columna;
 
     public Butaca() {
     }
 
-    public Butaca(Sala sala, int fila, int columna) {
+    public Butaca(Sala sala, String fila, String columna) {
         this.sala = sala;
         this.fila = fila;
         this.columna = columna;
@@ -33,19 +33,19 @@ public class Butaca {
         this.sala = sala;
     }
 
-    public int getFila() {
+    public String getFila() {
         return fila;
     }
 
-    public void setFila(int fila) {
+    public void setFila(String fila) {
         this.fila = fila;
     }
 
-    public int getColumna() {
+    public String getColumna() {
         return columna;
     }
 
-    public void setColumna(int columna) {
+    public void setColumna(String columna) {
         this.columna = columna;
     }
     

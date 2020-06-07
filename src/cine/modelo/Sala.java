@@ -11,7 +11,7 @@ package cine.modelo;
  */
 public class Sala {
     
-    private int idSala;
+    private int idSala = -1;
     private String ubicacion;
 
     public Sala() {

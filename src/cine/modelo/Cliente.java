@@ -4,7 +4,7 @@ package cine.modelo;
 
 public class Cliente {
     
-    private int idCliente;
+    private int idCliente = -1;
     private long dni;
     private String nombre;
     private String apellido;
