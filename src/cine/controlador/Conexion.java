@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class Conexion {
     private String url = "jdbc:mysql://localhost/cine";
     private String usuario = "root";
-    private String password = "Pintura.";
+    private String password = "";
     private Connection conexion;
 
     public Conexion(String url, String usuario, String password) {
