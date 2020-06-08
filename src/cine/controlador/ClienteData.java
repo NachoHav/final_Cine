@@ -86,7 +86,37 @@ public class ClienteData {
         }
     }
     
-    
+    public Cliente buscarcliente(int idCliente)
+    {
+        Cliente cliente = null;
+        
+        try 
+        {
+            String query = "SELECT * FROM cliente WHERE idCliente = ?";
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,idCliente);           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            cliente = new Cliente();
+            
+            while(resultSet.next())
+            {
+                cliente.setIdCliente(resultSet.getInt("idCliente"));
+                cliente.setNombre(resultSet.getString("nombre"));               
+                cliente.setApellido(resultSet.getString("apellido"));
+                cliente.setDni(resultSet.getLong("dni"));
+            }      
+            statement.close();   
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Consulta de Cliente: " + ex.getMessage());
+        }
+        
+        return cliente;
+    }
     
 }
 

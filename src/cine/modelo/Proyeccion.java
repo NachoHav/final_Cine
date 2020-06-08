@@ -21,6 +21,16 @@ public class Proyeccion {
         this.horaDesde = horaDesde;
         this.horaHasta = horaHasta;
     }
+    
+    public int getIdProyeccion() 
+    {
+        return idProyeccion;
+    }
+
+    public void setIdProyeccion(int idProyeccion) 
+    {
+        this.idProyeccion = idProyeccion;
+    }
 
     public Pelicula getPelicula() {
         return pelicula;
@@ -52,9 +62,5 @@ public class Proyeccion {
 
     public void setHoraHasta(LocalDate horaHasta) {
         this.horaHasta = horaHasta;
-    }
- 
-    
-    
-    
+    }   
 }

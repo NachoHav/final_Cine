@@ -4,12 +4,14 @@ package cine.controlador;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Conexion {
     private String url = "jdbc:mysql://localhost/cine";
     private String usuario = "root";
-    private String password = "";
+    private String password = "Pintura.";
     private Connection conexion;
 
     public Conexion(String url, String usuario, String password) {
@@ -24,8 +26,16 @@ public class Conexion {
         }
     }
 
-    public Conexion() throws ClassNotFoundException {
-        Class.forName("org.mariadb.jdbc.Driver");  
+    public Conexion()
+    {
+        try 
+        {  
+            Class.forName("org.mariadb.jdbc.Driver");
+        } 
+        catch (ClassNotFoundException ex) 
+        {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     

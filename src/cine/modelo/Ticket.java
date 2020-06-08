@@ -27,6 +27,16 @@ public class Ticket {
         this.metodo_pago = metodo_pago;
     }
 
+    public int getIdTicket() 
+    {
+        return idTicket;
+    }
+
+    public void setIdTicket(int idTicket) 
+    {
+        this.idTicket = idTicket;
+    }   
+    
     public Cliente getCliente() {
         return cliente;
     }

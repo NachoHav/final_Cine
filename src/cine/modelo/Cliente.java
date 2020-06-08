@@ -48,12 +48,4 @@ public class Cliente {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
