@@ -20,8 +20,11 @@ public class testCine
         Conexion con = new Conexion();
         con.getConexion();
         
-        Cliente cliente = new Cliente();
-        
-        Ticket ticket = new Ticket();
+        Cliente cliente = new Cliente(12345679,"Laura","Garcia");
+        ClienteData cd = new ClienteData(con);
+        cd.altaCliente(cliente);
+        //cd.bajaCliente(3);
+        cliente.setNombre("María");
+        cd.modificarCliente(cliente);
     }
 }

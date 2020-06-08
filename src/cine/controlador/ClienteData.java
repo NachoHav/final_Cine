@@ -71,7 +71,8 @@ public class ClienteData {
     
     public void modificarCliente(Cliente cliente)
     {
-        try {
+        try 
+        {
             String sql = "UPDATE cliente SET nombre = ?, apellido=?, dni= ? WHERE idCliente ="+cliente.getIdCliente()+";";
             
             PreparedStatement ps = con.prepareCall(sql);
@@ -79,9 +80,12 @@ public class ClienteData {
             ps.setString(2, cliente.getApellido());
             ps.setLong(3, cliente.getDni());
             
+            ps.executeUpdate();
+            
             ps.close();
             
-        } catch (Exception ex) {
+        } catch (Exception ex) 
+        {
             System.out.println("Error al modificar el cliente. " + ex.getMessage());
         }
     }
