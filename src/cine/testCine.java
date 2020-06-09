@@ -19,12 +19,19 @@ public class testCine
     {
         Conexion con = new Conexion();
         con.getConexion();
-        
+
         Cliente cliente = new Cliente(12345679,"Laura","Garcia");
         ClienteData cd = new ClienteData(con);
         cd.altaCliente(cliente);
         //cd.bajaCliente(3);
         cliente.setNombre("María");
         cd.modificarCliente(cliente);
+
+        /*Cliente prueba = new Cliente(123,"NombrePrueba", "ApellidoPrueba");
+        ClienteData cd = new ClienteData(con);
+        cd.altaCliente(prueba);
+        prueba.setApellido("Pruebasss");
+        cd.modificarCliente(prueba);*/
+
     }
 }
