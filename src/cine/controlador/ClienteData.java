@@ -71,11 +71,12 @@ public class ClienteData {
     
     public void modificarCliente(Cliente cliente)
     {
+        System.out.println("prueba1");
+        System.out.println("prueba2");
         try 
         {
-            //Comentario de prueba -.- 
-            String sql = "UPDATE cliente VALUES('nombre','apellido','dni') SET (?,?,?) WHERE idCliente ="+cliente.getIdCliente()+";";
-
+            
+            String sql = "UPDATE cliente SET nombre = ?, apellido=?, dni= ? WHERE idCliente ="+cliente.getIdCliente()+";";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cliente.getNombre());
             ps.setString(2, cliente.getApellido());

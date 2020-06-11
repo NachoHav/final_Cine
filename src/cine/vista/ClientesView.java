@@ -199,6 +199,7 @@ public class ClientesView extends javax.swing.JInternalFrame {
             long dni = Integer.parseInt(jTDni.getText());
             
             Cliente clienteIngresado = new Cliente(dni, nombre, apellido);
+            clienteIngresado.setIdCliente(id);
             clienteData.modificarCliente(clienteIngresado);
         }
     }//GEN-LAST:event_jBModificarActionPerformed
