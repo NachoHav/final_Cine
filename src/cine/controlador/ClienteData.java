@@ -73,6 +73,7 @@ public class ClienteData {
     {
         try 
         {
+            //Comentario de prueba -.- 
             String sql = "UPDATE cliente VALUES('nombre','apellido','dni') SET (?,?,?) WHERE idCliente ="+cliente.getIdCliente()+";";
 
             PreparedStatement ps = con.prepareStatement(sql);
