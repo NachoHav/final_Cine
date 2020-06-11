@@ -71,11 +71,8 @@ public class ClienteData {
     
     public void modificarCliente(Cliente cliente)
     {
-        System.out.println("prueba1");
-        System.out.println("prueba2");
         try 
         {
-            
             String sql = "UPDATE cliente SET nombre = ?, apellido=?, dni= ? WHERE idCliente ="+cliente.getIdCliente()+";";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, cliente.getNombre());
