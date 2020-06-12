@@ -5,13 +5,18 @@
  */
 package cine.controlador;
 
+import cine.modelo.Butaca;
 import cine.modelo.Cliente;
+import cine.modelo.Proyeccion;
+import cine.modelo.Sala;
 import cine.modelo.Ticket;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -98,5 +103,50 @@ public class TicketData
         {
             System.out.println("ERROR: Modificación Ticket " + ex.getMessage());
         }    
+    }
+    
+    public List<Butaca> getButacasLibres(Proyeccion proyeccion, Sala sala)
+    {
+        List<Butaca> butacas = new ArrayList<Butaca>();
+        
+        try 
+        {
+            String query = "SELECT butaca.idButaca,\n" +
+                            "butaca.fila,\n" +
+                            "butaca.columna\n" +
+                            "FROM butaca\n" +
+                            "WHERE butaca.idButaca NOT IN (SELECT ticket.idButaca\n" +
+                            "FROM ticket\n" +
+                            "JOIN butaca\n" +
+                            "ON ticket.idButaca = butaca.idButaca\n" +
+                            "WHERE ((ticket.idProyeccion = ?) AND \n" +
+                            "(YEAR(ticket.fecha_ticket) = YEAR(NOW()) AND\n" +
+                            "MONTH(ticket.fecha_ticket) = MONTH(NOW()) AND\n" +
+                            "DAY(ticket.fecha_ticket) = DAY(NOW())))) AND\n" +
+                            "(butaca.idSala = ?)";
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,proyeccion.getIdProyeccion());
+            statement.setInt(2,sala.getIdSala());
+           
+            ResultSet resultSet = statement.executeQuery();
+            Butaca butaca;
+            while(resultSet.next())
+            {
+                butaca = new Butaca();
+                butaca.setIdButaca(resultSet.getInt("idButaca"));
+                butaca.setFila(resultSet.getString("fila"));              
+                butaca.setColumna(resultSet.getString("columna"));              
+
+                butacas.add(butaca);
+            }      
+            statement.close();    
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Butacas Libres " + ex.getMessage());
+        }    
+        
+        return butacas;
     }
 }
