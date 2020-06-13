@@ -7,6 +7,7 @@ package cine;
 
 import cine.controlador.*;
 import cine.modelo.Cliente;
+import cine.modelo.Pelicula;
 import cine.modelo.Ticket;
 import java.time.LocalDate;
 
@@ -21,6 +22,7 @@ public class testCine
         Conexion con = new Conexion();
         con.getConexion();
         ClienteData cd = new ClienteData(con);
+        PeliculaData pd = new PeliculaData(con);
         
         // PRUEBAS PARA LA ENTREGA DEL 14/6 - NO BORRAR-
         // Alta, baja y modificacion de Clientes:
@@ -40,7 +42,27 @@ public class testCine
         cd.altaCliente(cliente3);
         int id = cliente3.getIdCliente();
         cd.bajaCliente(id);
+        
+        // Alta, baja y modificacion de Pelicula:
+        
+        // Alta de Pelicula
+        Pelicula pelicula1 = new Pelicula("Titulo de prueba 1");
+        pd.altaPelicula(pelicula1);
+        
+        // Modificacion de Pelicula:
+        Pelicula pelicula2 = new Pelicula("Titulo de prueba 2");
+        pd.altaPelicula(pelicula2);
+        pelicula2.setTitulo("Titulo Modificado 2");
+        pd.modificarPelicula(pelicula2);
+        
+        // Baja de Pelicula:
+        Pelicula pelicula3 = new Pelicula("Titulo de prueba 3");
+        pd.altaPelicula(pelicula3);
+        int P = pelicula3.getIdPelicula();
+        pd.bajaPelicula(P);
+        
         // FIN PRUEBAS PARA LA ENTREGA DEL 14/6
+        
         
         
         // OTRAS PRUEBAS:

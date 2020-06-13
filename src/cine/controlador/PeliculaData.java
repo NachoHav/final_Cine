@@ -65,7 +65,7 @@ public class PeliculaData {
     public void modificarPelicula(Pelicula pelicula)
     {
         try {
-            String sql = "UPDATE titulo SET titulo = ? WHERE idPelicula ="+pelicula.getIdPelicula()+";";
+            String sql = "UPDATE pelicula SET titulo = ? WHERE idPelicula ="+pelicula.getIdPelicula()+";";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, pelicula.getTitulo());
