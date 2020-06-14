@@ -9,12 +9,12 @@ package cine.vista;
  *
  * @author Arezlon
  */
-public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
+public class AltaTicketsView extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form BajaModificacionClientesView
+     * Creates new form AltaTicketsView
      */
-    public BajaModificacionClientesView() {
+    public AltaTicketsView() {
         initComponents();
     }
 
@@ -28,7 +28,7 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
-        setTitle("Baja y modificacion de Clientes");
+        setTitle("Alta de Tickets");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

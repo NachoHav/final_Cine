@@ -9,12 +9,12 @@ package cine.vista;
  *
  * @author Arezlon
  */
-public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
+public class TicketsXPelicula extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form BajaModificacionClientesView
+     * Creates new form TicketsXPelicula
      */
-    public BajaModificacionClientesView() {
+    public TicketsXPelicula() {
         initComponents();
     }
 
@@ -26,9 +26,6 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        setClosable(true);
-        setTitle("Baja y modificacion de Clientes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -149,9 +149,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu5.setText("Tickets");
 
         jMenuItem13.setText("Generar ticket de compra");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem13);
 
         jMenuItem14.setText("Modificar o anular ticket");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem14);
 
         jMenuBar1.add(jMenu5);
@@ -196,38 +206,88 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMClientesActionPerformed
-        System.out.println("Alta de Clientes");
-        /*jEscritorio.removeAll();
+        //ALTA DE CLIENTES
+        jEscritorio.removeAll();
         jEscritorio.repaint();
-        ClientesView panelClientes = new ClientesView();
-        panelClientes.setVisible(true);
-        jEscritorio.add(panelClientes);
-        jEscritorio.moveToFront(panelClientes);*/
+        AltaClientesView panelAltaClientes = new AltaClientesView();
+        panelAltaClientes.setVisible(true);
+        jEscritorio.add(panelAltaClientes);
+        jEscritorio.moveToFront(panelAltaClientes);
     }//GEN-LAST:event_jMClientesActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        System.out.println("Alta de Peliculas");
+        //ALTA DE PELICULAS
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        AltaPeliculasView panelAltaPeliculas = new AltaPeliculasView();
+        panelAltaPeliculas.setVisible(true);
+        jEscritorio.add(panelAltaPeliculas);
+        jEscritorio.moveToFront(panelAltaPeliculas);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        System.out.println("Baja y modificacion de Peliculas");
+        //BAJA Y MODIFICACION DE PELICULAS
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        BajaModificacionPeliculasView panelBMPeliculas = new BajaModificacionPeliculasView();
+        panelBMPeliculas.setVisible(true);
+        jEscritorio.add(panelBMPeliculas);
+        jEscritorio.moveToFront(panelBMPeliculas);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        System.out.println("Baja y modificacion de Salas");
+        //BAJA Y MODIFICACION DE SALAS
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        BajaModificacionSalasView panelBMSalas = new BajaModificacionSalasView();
+        panelBMSalas.setVisible(true);
+        jEscritorio.add(panelBMSalas);
+        jEscritorio.moveToFront(panelBMSalas);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        
+        //ELIMINAR
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        System.out.println("Baja y modificacion de Clientes");
+        //BAJA Y MODIFICACION DE TICKETS
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        BajaModificacionPeliculasView panelBMPeliculas = new BajaModificacionPeliculasView();
+        panelBMPeliculas.setVisible(true);
+        jEscritorio.add(panelBMPeliculas);
+        jEscritorio.moveToFront(panelBMPeliculas);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        System.out.println("Alta de Salas");
+        //ALTA DE SALAS
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        AltaSalasView panelAltaSalas = new AltaSalasView();
+        panelAltaSalas.setVisible(true);
+        jEscritorio.add(panelAltaSalas);
+        jEscritorio.moveToFront(panelAltaSalas);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        //ALTA DE TICKETS
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        AltaTicketsView PanelGeneracionTicket = new AltaTicketsView();
+        PanelGeneracionTicket.setVisible(true);
+        jEscritorio.add(PanelGeneracionTicket);
+        jEscritorio.moveToFront(PanelGeneracionTicket);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        //BAJA Y MODIFICACION DE TICKETS
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        BajaModificacionTicketsView PanelEdicionTicket = new BajaModificacionTicketsView();
+        PanelEdicionTicket.setVisible(true);
+        jEscritorio.add(PanelEdicionTicket);
+        jEscritorio.moveToFront(PanelEdicionTicket);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     /**
      * @param args the command line arguments
