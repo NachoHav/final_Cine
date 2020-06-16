@@ -25,6 +25,36 @@ public class ProyeccionData {
     {
     }
     
+    public void guardarProyeccion(Proyeccion proyeccion)
+    {
+        try 
+        {   
+            String query = "INSERT INTO proyeccion (idPelicula,idSala,horario_desde,horario_hasta) VALUES (?,?,?,?)";
+
+            PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, materia.getNombre());
+
+            statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+
+            if (rs.next()) 
+            {
+                materia.setId(rs.getInt(1));
+                System.out.println("Se insertó la Materia "+materia.getNombre()+" de forma correcta!");                    
+            } 
+            else 
+            {
+                System.out.println("ERROR: Obtención de ID luego de inserción de Materia");
+            }
+            statement.close();    
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Inserción Materia: " + ex.getMessage());
+        }
+    }
+    
     public List<Proyeccion> obtenerProyecciones(Sala sala,LocalDate horario)
     {
         List<Proyeccion> proyecciones = new ArrayList<Proyeccion>();
