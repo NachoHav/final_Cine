@@ -17,8 +17,6 @@ import java.awt.Color;
 public class AltaClientesView extends javax.swing.JInternalFrame {
     private ClienteData clienteData;
     private Conexion con;
-    private Color colorExito;
-    private Color colorError;
     /**
      * Creates new form AltaClientesView
      */
@@ -26,9 +24,6 @@ public class AltaClientesView extends javax.swing.JInternalFrame {
         initComponents();
         con = new Conexion();
         clienteData = new ClienteData(con);
-        Color colorExito = new Color(7, 110, 46);
-        Color colorError = new Color(255, 0, 0);
-        
     }
 
     /**
@@ -184,7 +179,8 @@ public class AltaClientesView extends javax.swing.JInternalFrame {
         String nombre = jTNombreCliente.getText();
         String apellido = jTApellidoCliente.getText();
         long dni =  Long.parseLong(jTDniCliente.getText());
-
+        Color colorExito = new Color(7, 110, 46);
+        Color colorError = new Color(255, 0, 0);
         Cliente clienteIngresado = new Cliente(dni,nombre,apellido);
         clienteData.altaCliente(clienteIngresado);
         jLAlerta.setText("Creado el cliente "+clienteIngresado.getApellido()+" "+clienteIngresado.getNombre()+" correctamente");
