@@ -5,17 +5,30 @@
  */
 package cine.vista;
 
+import cine.controlador.ClienteData;
+import cine.controlador.Conexion;
+import cine.modelo.Cliente;
+import java.awt.Color;
+
 /**
  *
  * @author Arezlon
  */
 public class AltaClientesView extends javax.swing.JInternalFrame {
-
+    private ClienteData clienteData;
+    private Conexion con;
+    private Color colorExito;
+    private Color colorError;
     /**
      * Creates new form AltaClientesView
      */
     public AltaClientesView() {
         initComponents();
+        con = new Conexion();
+        clienteData = new ClienteData(con);
+        Color colorExito = new Color(7, 110, 46);
+        Color colorError = new Color(255, 0, 0);
+        
     }
 
     /**
@@ -27,24 +40,180 @@ public class AltaClientesView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLAlerta = new javax.swing.JLabel();
+        jTNombreCliente = new javax.swing.JTextField();
+        jTApellidoCliente = new javax.swing.JTextField();
+        jTDniCliente = new javax.swing.JTextField();
+        jBGuardar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jBVaciar = new javax.swing.JButton();
+
         setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
         setTitle("Alta de Clientes");
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setText("Nombre*");
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setText("Apellido*");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setText("DNI*");
+
+        jLAlerta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAlerta.setText(" ");
+
+        jTNombreCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTNombreClienteActionPerformed(evt);
+            }
+        });
+
+        jTApellidoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTApellidoClienteActionPerformed(evt);
+            }
+        });
+
+        jTDniCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTDniClienteActionPerformed(evt);
+            }
+        });
+
+        jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
+
+        jBVaciar.setText("Vaciar");
+        jBVaciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVaciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTNombreCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                .addComponent(jTApellidoCliente, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(0, 54, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBVaciar)
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLAlerta)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBGuardar)
+                    .addComponent(jBVaciar))
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNombreClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNombreClienteActionPerformed
+
+    private void jTApellidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTApellidoClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTApellidoClienteActionPerformed
+
+    private void jTDniClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTDniClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTDniClienteActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        String nombre = jTNombreCliente.getText();
+        String apellido = jTApellidoCliente.getText();
+        long dni =  Long.parseLong(jTDniCliente.getText());
+
+        Cliente clienteIngresado = new Cliente(dni,nombre,apellido);
+        clienteData.altaCliente(clienteIngresado);
+        jLAlerta.setText("Creado el cliente "+clienteIngresado.getApellido()+" "+clienteIngresado.getNombre()+" correctamente");
+        jLAlerta.setForeground(colorExito);
+        
+        vaciarTodo();
+    }//GEN-LAST:event_jBGuardarActionPerformed
+    private void vaciarTodo(){
+        jTNombreCliente.setText("");
+        jTApellidoCliente.setText("");
+        jTDniCliente.setText("");
+        //jLAlerta.setText("");
+    }
+    private void jBVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVaciarActionPerformed
+        vaciarTodo();
+    }//GEN-LAST:event_jBVaciarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBVaciar;
+    private javax.swing.JLabel jLAlerta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTApellidoCliente;
+    private javax.swing.JTextField jTDniCliente;
+    private javax.swing.JTextField jTNombreCliente;
     // End of variables declaration//GEN-END:variables
 }
