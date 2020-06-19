@@ -73,6 +73,16 @@ public class testCine
         Proyeccion p  = new Proyeccion(pelicula2, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
         prd.altaProyeccion(p);
         
+        /*Sala s2 = new Sala("Sala 2");
+        sd.altaSala(s2);*/
+        
+        p.setPelicula(pelicula1);
+        prd.modificarProyeccion(p);
+        
+        Proyeccion prueba1 = prd.buscarProyeccion(3);
+        System.out.println(prueba1.getPelicula().getTitulo());
+        //prd.bajaProyeccion(p.getIdProyeccion());
+        
         
         
         // OTRAS PRUEBAS:

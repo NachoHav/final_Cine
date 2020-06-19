@@ -79,6 +79,37 @@ public class PeliculaData {
     
     }
     
+     public Pelicula buscarPelicula(int idPelicula)
+    {
+        Pelicula p = null;
+        
+        try 
+        {
+            String query = "SELECT * FROM pelicula WHERE idPelicula = ?";
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,idPelicula);           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            p = new Pelicula();
+            
+            while(resultSet.next())
+            {
+                p.setIdPelicula(resultSet.getInt("idPelicula"));
+                p.setTitulo(resultSet.getString("titulo"));
+            }      
+            statement.close();   
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("Error al buscar la pelicula: " + ex.getMessage());
+        }
+        
+        return p;
+    }
+    
+    
 }
 
 
