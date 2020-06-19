@@ -7,7 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,37 +28,40 @@ public class ProyeccionData {
     {
     }
     
-    public void guardarProyeccion(Proyeccion proyeccion)
+    public void altaProyeccion(Proyeccion proyeccion)
     {
         try 
         {   
-            String query = "INSERT INTO proyeccion (idPelicula,idSala,horario_desde,horario_hasta) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO proyeccion (idPelicula,idSala,horario_desde,horario_hasta) VALUES (?,?,?,?)";
 
-            PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, materia.getNombre());
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, proyeccion.getPelicula().getIdPelicula());
+            ps.setInt(2, proyeccion.getSala().getIdSala());
+            ps.setTime(3, Time.valueOf(proyeccion.getHoraDesde()));
+            ps.setTime(4, Time.valueOf(proyeccion.getHoraHasta()));
 
-            statement.executeUpdate();
+            ps.executeUpdate();
 
-            ResultSet rs = statement.getGeneratedKeys();
+            ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) 
             {
-                materia.setId(rs.getInt(1));
-                System.out.println("Se insertó la Materia "+materia.getNombre()+" de forma correcta!");                    
+                proyeccion.setIdProyeccion(rs.getInt(1));
+                System.out.println("Se insertó la Proyección de la pelicula "+proyeccion.getPelicula().getTitulo()+" a las "+proyeccion.getHoraDesde() +"de forma correcta!");                    
             } 
             else 
             {
-                System.out.println("ERROR: Obtención de ID luego de inserción de Materia");
+                System.out.println("ERROR");
             }
-            statement.close();    
+            ps.close();    
         } 
         catch (SQLException ex) 
         {
-            System.out.println("ERROR: Inserción Materia: " + ex.getMessage());
+            System.out.println("ERROR: Inserción Proyección: " + ex.getMessage());
         }
     }
     
-    public List<Proyeccion> obtenerProyecciones(Sala sala,LocalDate horario)
+    /*public List<Proyeccion> obtenerProyecciones(Sala sala,LocalDate horario)
     {
         List<Proyeccion> proyecciones = new ArrayList<Proyeccion>();
     
@@ -90,6 +96,6 @@ public class ProyeccionData {
         }
         
         return proyecciones;
-    }
+    }*/
        
 }

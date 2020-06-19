@@ -2,6 +2,7 @@
 package cine.modelo;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 public class Proyeccion {
@@ -9,13 +10,13 @@ public class Proyeccion {
     private Pelicula pelicula;
     private Sala sala;
     
-    private LocalDate horaDesde;
-    private LocalDate horaHasta;
+    private LocalTime horaDesde;
+    private LocalTime horaHasta;
 
     public Proyeccion() {
     }
 
-    public Proyeccion(Pelicula pelicula, Sala sala, LocalDate horaDesde, LocalDate horaHasta) {
+    public Proyeccion(Pelicula pelicula, Sala sala, LocalTime horaDesde, LocalTime horaHasta) {
         this.pelicula = pelicula;
         this.sala = sala;
         this.horaDesde = horaDesde;
@@ -48,19 +49,19 @@ public class Proyeccion {
         this.sala = sala;
     }
 
-    public LocalDate getHoraDesde() {
+    public LocalTime getHoraDesde() {
         return horaDesde;
     }
 
-    public void setHoraDesde(LocalDate horaDesde) {
+    public void setHoraDesde(LocalTime horaDesde) {
         this.horaDesde = horaDesde;
     }
 
-    public LocalDate getHoraHasta() {
+    public LocalTime getHoraHasta() {
         return horaHasta;
     }
 
-    public void setHoraHasta(LocalDate horaHasta) {
+    public void setHoraHasta(LocalTime horaHasta) {
         this.horaHasta = horaHasta;
     }   
 }

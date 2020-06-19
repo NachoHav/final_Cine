@@ -8,8 +8,11 @@ package cine;
 import cine.controlador.*;
 import cine.modelo.Cliente;
 import cine.modelo.Pelicula;
+import cine.modelo.Proyeccion;
+import cine.modelo.Sala;
 import cine.modelo.Ticket;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -23,6 +26,8 @@ public class testCine
         con.getConexion();
         ClienteData cd = new ClienteData(con);
         PeliculaData pd = new PeliculaData(con);
+        ProyeccionData prd = new ProyeccionData(con);
+        SalaData sd = new SalaData(con);
         
         // PRUEBAS PARA LA ENTREGA DEL 14/6 - NO BORRAR-
         // Alta, baja y modificacion de Clientes:
@@ -62,6 +67,11 @@ public class testCine
         pd.bajaPelicula(P);
         
         // FIN PRUEBAS PARA LA ENTREGA DEL 14/6
+        
+        Sala s = new Sala("Sala 1");
+        sd.altaSala(s);
+        Proyeccion p  = new Proyeccion(pelicula2, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
+        prd.altaProyeccion(p);
         
         
         
