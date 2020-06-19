@@ -13,6 +13,8 @@ import cine.modelo.Sala;
 import cine.modelo.Ticket;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -81,6 +83,19 @@ public class testCine
         
         Proyeccion prueba1 = prd.buscarProyeccion(3);
         System.out.println(prueba1.getPelicula().getTitulo());
+        
+        //System.out.println(prd.buscarProyeccionXSalaYHorario(1, LocalTime.of(22, 30)).getIdProyeccion());
+        
+        /*Pelicula pruebaAgregada = pd.buscarPelicula(4);
+        Proyeccion proyNueva = new Proyeccion(pruebaAgregada, s, LocalTime.of(22, 31), LocalTime.of(22, 32));
+        prd.altaProyeccion(proyNueva);
+        
+        List<Proyeccion> proyeccionesXPelicula = new ArrayList<Proyeccion>();
+        proyeccionesXPelicula = prd.obtenerProyeccionesXPelicula(4);
+        for (Proyeccion prueba7 : proyeccionesXPelicula) {
+            System.out.println(prueba7.getPelicula().getTitulo());
+        }*/
+        
         //prd.bajaProyeccion(p.getIdProyeccion());
         
         

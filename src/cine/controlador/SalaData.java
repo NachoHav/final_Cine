@@ -72,6 +72,36 @@ public class SalaData {
         }
     }
     
+    public Sala buscarSala(int idSala)
+    {
+        Sala sala = null;
+        
+        try 
+        {
+            String query = "SELECT * FROM sala WHERE idSala = ?";
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,idSala);           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            sala = new Sala();
+            
+            while(resultSet.next())
+            {
+                sala.setIdSala(resultSet.getInt("idSala"));
+                sala.setUbicacion(resultSet.getString("ubicacion"));
+            }      
+            statement.close();   
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Consulta de Sala: " + ex.getMessage());
+        }
+        
+        return sala;
+    }
+    
 }
 
 

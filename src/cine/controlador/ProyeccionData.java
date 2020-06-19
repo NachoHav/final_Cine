@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,10 +132,76 @@ public class ProyeccionData {
         return pro;
     }
     
-    //AGREGAR:
-    //BUSQUEDA POR ID
-    //LISTA POR SALA Y HORARIO
-    //LISTA POR PELICULA
+    public Proyeccion buscarProyeccionXSalaYHorario(int idSala, LocalTime horaInicio)
+    {
+        Proyeccion pro = null;
+        PeliculaData pd = new PeliculaData(con2);
+        
+        try 
+        {
+            String query = "SELECT * FROM proyeccion WHERE idSala = ? AND horario_desde = ?";
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,idSala);
+            statement.setTime(2, Time.valueOf(horaInicio));
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            pro = new Proyeccion();
+            
+            while(resultSet.next())
+            {
+                pro.setIdProyeccion(resultSet.getInt("idProyeccion"));
+                pro.setPelicula(pd.buscarPelicula(resultSet.getInt("idPelicula")));
+                pro.setHoraDesde(resultSet.getTime("horario_desde").toLocalTime());
+                pro.setHoraHasta(resultSet.getTime("horario_hasta").toLocalTime());
+            }      
+            statement.close();   
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Consulta de proyeccion: " + ex.getMessage());
+        }
+        
+        return pro;
+    }
+    
+    public List<Proyeccion> obtenerProyeccionesXPelicula(int idPelicula)
+    {
+        List<Proyeccion> proyeccionesXPelicula = new ArrayList<Proyeccion>();
+        PeliculaData pd = new PeliculaData(con2);
+        SalaData sd = new SalaData(con2);
+    
+        try 
+        {
+            String query = "SELECT * FROM proyeccion WHERE (proyeccion.idPelicula = ?)";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, idPelicula);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            Proyeccion proyeccion;
+            
+            while(resultSet.next())
+            {
+                proyeccion = new Proyeccion();
+                proyeccion.setIdProyeccion(resultSet.getInt("idProyeccion"));
+                proyeccion.setPelicula(pd.buscarPelicula(resultSet.getInt("idPelicula")));            
+                proyeccion.setSala(sd.buscarSala(resultSet.getInt("idSala")));  
+                proyeccion.setHoraDesde(resultSet.getTime("horario_desde").toLocalTime());
+                proyeccion.setHoraHasta(resultSet.getTime("horario_hasta").toLocalTime());
+
+                proyeccionesXPelicula.add(proyeccion);
+            }      
+            statement.close();
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Obtención de alumnos: " + ex.getMessage());
+        }
+        
+        return proyeccionesXPelicula;
+    }
     
     /*public List<Proyeccion> obtenerProyecciones(Sala sala,LocalDate horario)
     {
