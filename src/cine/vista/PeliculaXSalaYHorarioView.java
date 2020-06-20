@@ -60,6 +60,7 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
         jcbSalas = new javax.swing.JComboBox<Sala>();
         jcbHorarios = new javax.swing.JComboBox<Proyeccion>();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
