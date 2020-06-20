@@ -5,8 +5,10 @@ import cine.controlador.Conexion;
 import cine.controlador.PeliculaData;
 import cine.controlador.ProyeccionData;
 import cine.controlador.SalaData;
+import cine.modelo.Pelicula;
 import cine.modelo.Proyeccion;
 import cine.modelo.Sala;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -28,6 +30,7 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
         listaProyecciones = (ArrayList)proyeccionData.obtenerProyecciones();
         
         cargarDesplegableSalas();
+        cargarDesplegableHorarios();
     }
 
     private void cargarDesplegableSalas(){
@@ -57,6 +60,11 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
         jcbSalas = new javax.swing.JComboBox<Sala>();
         jcbHorarios = new javax.swing.JComboBox<Proyeccion>();
 
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Peliculas por Sala y Horario");
+
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("Peliculas por Sala y Horario");
 
@@ -69,7 +77,14 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Pelicula");
 
+        jtTituloPelicula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jcbHorarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +148,15 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
     private void jcbHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbHorariosActionPerformed
         
     }//GEN-LAST:event_jcbHorariosActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+       Sala idSala = (Sala) jcbSalas.getSelectedItem();
+       Proyeccion hora = (Proyeccion) jcbHorarios.getSelectedItem();
+       
+       Proyeccion pelicula = proyeccionData.buscarProyeccionXSalaYHorario(idSala.getIdSala(), hora.getHoraDesde());
+       
+       jtTituloPelicula.setText(pelicula.getPelicula().getTitulo());
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
