@@ -32,4 +32,11 @@ public class Pelicula {
         this.titulo = titulo;
     }
 
+    @Override
+    public String toString() {
+        return titulo;
+    }
+    
+    
+
 }
