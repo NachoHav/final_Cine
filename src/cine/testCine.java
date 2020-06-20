@@ -36,6 +36,30 @@ public class testCine
         TicketData td = new TicketData(con);
         ButacaData bda = new ButacaData(con);
         
+        //PRUEBAS NECESARIAS - NO COMENTAR O BORRAR ESTO XD
+        Cliente cliente1 = new Cliente(1,"Nombre","Apellido");
+        cd.altaCliente(cliente1);
+        
+        Pelicula pelicula1 = new Pelicula("Titulo Pelicula 1");
+        pd.altaPelicula(pelicula1);
+        
+        Sala s = new Sala("Sala 1");
+        sd.altaSala(s);
+        Proyeccion p  = new Proyeccion(pelicula1, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
+        prd.altaProyeccion(p);
+        
+        Butaca b = new Butaca(s, "A", "3");
+        bda.altaButaca(b);
+        
+        
+       Ticket t = new Ticket(cliente1, p, b, LocalDate.of(2020, Month.JUNE, 20), 30, true, "Mercado Pago");
+       td.generarTicket(t);
+       
+       //
+        
+        
+        
+        
         // PRUEBAS PARA LA ENTREGA DEL 14/6 - NO BORRAR-
         // Alta, baja y modificacion de Clientes:
         
@@ -94,7 +118,7 @@ public class testCine
             salaTemp = (Sala)it.next();
             System.out.println(salaTemp.getIdSala()+" // "+ salaTemp.getUbicacion());
         }
-        System.out.println("//////////////////////////////////FIN PRUEBA obtenerSalas()");  
+        System.out.println("//////////////////////////////////FIN PRUEBA obtenerSalas()");
           
 //        p.setPelicula(pelicula1);
 //        prd.modificarProyeccion(p);
