@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.spi.DirStateFactory;
@@ -121,5 +123,62 @@ public class ClienteData {
         return cliente;
     }
     
+    public Cliente buscarClienteXDni(long dni)
+    {
+        Cliente cliente = null;
+        
+        try 
+        {
+            String query = "SELECT * FROM cliente WHERE dni = ?";
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setLong(1,dni);           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            cliente = new Cliente();
+            
+            while(resultSet.next())
+            {
+                cliente.setIdCliente(resultSet.getInt("idCliente"));
+                cliente.setNombre(resultSet.getString("nombre"));               
+                cliente.setApellido(resultSet.getString("apellido"));
+                cliente.setDni(resultSet.getLong("dni"));
+            }      
+            statement.close();   
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Consulta de Cliente: " + ex.getMessage());
+        }
+        
+        return cliente;
+    }
+    
+    public List<Cliente> obtenerClientes(){
+        List<Cliente> clientes = new ArrayList<Cliente>();
+            
+
+        try {
+            String sql = "SELECT * FROM cliente;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+            Cliente cliente;
+            while(resultSet.next()){
+                cliente = new Cliente();
+                cliente.setIdCliente(resultSet.getInt("idCliente"));
+                cliente.setNombre(resultSet.getString("nombre"));
+                cliente.setApellido(resultSet.getString("apellido"));
+                cliente.setDni(resultSet.getLong("dni"));
+                clientes.add(cliente);
+            }      
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener los clientes: " + ex.getMessage());
+        }
+        
+        
+        return clientes;
+    }
 }
 
