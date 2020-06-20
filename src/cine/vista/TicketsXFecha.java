@@ -28,10 +28,10 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
      */
     public TicketsXFecha() {
         initComponents();
-        con = new Conexion();
+        /*con = new Conexion();
         modelo = new DefaultTableModel();
         td = new TicketData(con);
-        armarEncabezadosTabla();
+        armarEncabezadosTabla();*/
         
     }
 
@@ -47,7 +47,6 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTTickets = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
-        jDCFecha = new com.toedter.calendar.JDateChooser();
         jBBuscar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jBVaciar = new javax.swing.JButton();
@@ -101,21 +100,17 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(103, 103, 103)
                 .addComponent(jBBuscar)
                 .addGap(113, 113, 113))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBBuscar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDCFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,18 +128,18 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        cargarDatos();
+        //cargarDatos();
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void borrarFilas(){
-        int cantidadFilas = modelo.getRowCount()-1;
+        /*int cantidadFilas = modelo.getRowCount()-1;
         for(int i=cantidadFilas; i>=0; i--){
             modelo.removeRow(i);
-        }
+        }*/
     }
     
     private void cargarDatos(){
-        borrarFilas();
+        /*borrarFilas();
         Date fecha = (Date)jDCFecha.getDate();
         LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         listaTickets = (ArrayList)td.obtenerTicketXFecha(localDate);
@@ -157,11 +152,11 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
             System.out.println(t.getMonto());
             System.out.println(t.getMetodo_pago());
             //modelo.addRow(new Object[]{t.getIdTicket(),t.getCliente().getNombre(),t.getProyeccion().getPelicula().getTitulo(),t.getFecha_ticket(),t.getMonto(),t.getMetodo_pago()});
-        }
+        }*/
     }
     
     private void armarEncabezadosTabla(){
-        ArrayList<Object> columnas = new ArrayList<Object>();
+        /*ArrayList<Object> columnas = new ArrayList<Object>();
         columnas.add("ID Ticket");
         columnas.add("Cliente");
         columnas.add("Pelicula");
@@ -172,13 +167,12 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         for(Object columna:columnas){
             modelo.addColumn(columna);
         }
-        jTTickets.setModel(modelo);
+        jTTickets.setModel(modelo);*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBVaciar;
-    private com.toedter.calendar.JDateChooser jDCFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
