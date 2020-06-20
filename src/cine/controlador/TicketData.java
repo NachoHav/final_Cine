@@ -165,8 +165,6 @@ public class TicketData
         {
             String query = "SELECT * FROM ticket WHERE fecha_ticket = ?";
             PreparedStatement statement = con.prepareStatement(query);
-            
-            //java.sql.Date fechaFix = new java.sql.Date(fecha.getTime());
 
             statement.setObject(1, fecha);
             
@@ -180,8 +178,7 @@ public class TicketData
                 ticket.setIdTicket(resultSet.getInt("idTicket"));
                 ticket.setCliente(cd.buscarcliente(resultSet.getInt("idCliente")));
                 ticket.setProyeccion(pd.buscarProyeccion(resultSet.getInt("idProyeccion")));
-                //LocalDate localDate = resultSet.getDate("fecha_ticket").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
-                //ticket.setFecha_ticket(localDate);
+                ticket.setFecha_ticket(resultSet.getDate("fecha_ticket").toLocalDate());
                 ticket.setMonto(resultSet.getDouble("monto"));
                 ticket.setMetodo_pago(resultSet.getString("metodo_pago"));
                 
