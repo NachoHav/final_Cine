@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,60 +40,73 @@ public class testCine
         // Alta, baja y modificacion de Clientes:
         
         // Alta Cliente:
-        Cliente cliente1 = new Cliente(1,"Cliente1","Prueba1");
-        cd.altaCliente(cliente1);
+//        Cliente cliente1 = new Cliente(1,"Cliente1","Prueba1");
+//        cd.altaCliente(cliente1);
+//        
+//        // Modificacion Cliente:
+//        Cliente cliente2 = new Cliente(2,"Cliente2","Prueba2");
+//        cd.altaCliente(cliente2);
+//        cliente2.setNombre("Modificado");
+//        cd.modificarCliente(cliente2);
+//        
+//        // Baja Cliente:
+//        Cliente cliente3 = new Cliente(3,"Cliente3","Prueba3");
+//        cd.altaCliente(cliente3);
+//        int id = cliente3.getIdCliente();
+//        cd.bajaCliente(id);
+//        
+//        // Alta, baja y modificacion de Pelicula:
+//        
+//        // Alta de Pelicula
+//        Pelicula pelicula1 = new Pelicula("Titulo de prueba 1");
+//        pd.altaPelicula(pelicula1);
+//        
+//        // Modificacion de Pelicula:
+//        Pelicula pelicula2 = new Pelicula("Titulo de prueba 2");
+//        pd.altaPelicula(pelicula2);
+//        pelicula2.setTitulo("Titulo Modificado 2");
+//        pd.modificarPelicula(pelicula2);
+//        
+//        // Baja de Pelicula:
+//        Pelicula pelicula3 = new Pelicula("Titulo de prueba 3");
+//        pd.altaPelicula(pelicula3);
+//        int P = pelicula3.getIdPelicula();
+//        pd.bajaPelicula(P);
+//        
+//        // FIN PRUEBAS PARA LA ENTREGA DEL 14/6
+//        
+//        Sala s = new Sala("Sala 1");
+//        sd.altaSala(s);
+//        Proyeccion p  = new Proyeccion(pelicula2, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
+//        prd.altaProyeccion(p);
+//        
+//        /*Sala s2 = new Sala("Sala 2");
+//        sd.altaSala(s2);*/
+        System.out.println("//////////////////////////////////PRUEBA obtenerSalas()");
+        List<Sala> salas = new ArrayList<Sala>();  
         
-        // Modificacion Cliente:
-        Cliente cliente2 = new Cliente(2,"Cliente2","Prueba2");
-        cd.altaCliente(cliente2);
-        cliente2.setNombre("Modificado");
-        cd.modificarCliente(cliente2);
+        salas = sd.obtenerSalas();
+        Iterator it = salas.iterator();
+        Sala salaTemp = new Sala();
         
-        // Baja Cliente:
-        Cliente cliente3 = new Cliente(3,"Cliente3","Prueba3");
-        cd.altaCliente(cliente3);
-        int id = cliente3.getIdCliente();
-        cd.bajaCliente(id);
-        
-        // Alta, baja y modificacion de Pelicula:
-        
-        // Alta de Pelicula
-        Pelicula pelicula1 = new Pelicula("Titulo de prueba 1");
-        pd.altaPelicula(pelicula1);
-        
-        // Modificacion de Pelicula:
-        Pelicula pelicula2 = new Pelicula("Titulo de prueba 2");
-        pd.altaPelicula(pelicula2);
-        pelicula2.setTitulo("Titulo Modificado 2");
-        pd.modificarPelicula(pelicula2);
-        
-        // Baja de Pelicula:
-        Pelicula pelicula3 = new Pelicula("Titulo de prueba 3");
-        pd.altaPelicula(pelicula3);
-        int P = pelicula3.getIdPelicula();
-        pd.bajaPelicula(P);
-        
-        // FIN PRUEBAS PARA LA ENTREGA DEL 14/6
-        
-        Sala s = new Sala("Sala 1");
-        sd.altaSala(s);
-        Proyeccion p  = new Proyeccion(pelicula2, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
-        prd.altaProyeccion(p);
-        
-        /*Sala s2 = new Sala("Sala 2");
-        sd.altaSala(s2);*/
-        
-        p.setPelicula(pelicula1);
-        prd.modificarProyeccion(p);
-        
-        Proyeccion prueba1 = prd.buscarProyeccion(3);
-        System.out.println(prueba1.getPelicula().getTitulo());
-        Butaca b = new Butaca(s, "A", "B");
-        bda.altaButaca(b);
-        
-        
-        Ticket t = new Ticket(cliente1, p, b, LocalDate.of(2020, Month.JUNE, 20), 30, true, "prueba");
-        td.generarTicket(t);
+        while(it.hasNext())
+        {
+            salaTemp = (Sala)it.next();
+            System.out.println(salaTemp.getIdSala()+" // "+ salaTemp.getUbicacion());
+        }
+        System.out.println("//////////////////////////////////FIN PRUEBA obtenerSalas()");  
+          
+//        p.setPelicula(pelicula1);
+//        prd.modificarProyeccion(p);
+//        
+//        Proyeccion prueba1 = prd.buscarProyeccion(3);
+//        System.out.println(prueba1.getPelicula().getTitulo());
+//        Butaca b = new Butaca(s, "A", "B");
+//        bda.altaButaca(b);
+//        
+//        
+//        Ticket t = new Ticket(cliente1, p, b, LocalDate.of(2020, Month.JUNE, 20), 30, true, "prueba");
+//        td.generarTicket(t);
         
         
         //System.out.println(prd.buscarProyeccionXSalaYHorario(1, LocalTime.of(22, 30)).getIdProyeccion());

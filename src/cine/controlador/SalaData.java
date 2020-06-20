@@ -110,7 +110,7 @@ public class SalaData {
          List<Sala> salas = new ArrayList();
          
         try {   
-            String sql = "SELECT * FROM Sala";
+            String sql = "SELECT * FROM sala";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -119,7 +119,7 @@ public class SalaData {
             
             while(rs.next()){
                 sala = new Sala();
-                sala.setIdSala(rs.getInt("id"));
+                sala.setIdSala(rs.getInt("idSala"));
                 sala.setUbicacion(rs.getString("ubicacion"));
                 
                 salas.add(sala);
