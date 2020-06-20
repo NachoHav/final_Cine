@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,7 +80,7 @@ public class PeliculaData {
     
     }
     
-     public Pelicula buscarPelicula(int idPelicula)
+    public Pelicula buscarPelicula(int idPelicula)
     {
         Pelicula p = null;
         
@@ -109,6 +110,31 @@ public class PeliculaData {
         return p;
     }
     
+    public List<Pelicula> obtenerPeliculas()
+    {
+        List<Pelicula> peliculas = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT * FROM pelicula;";
+            
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            Pelicula pelicula;
+            while (resultSet.next()) {
+                pelicula = new Pelicula();
+                pelicula.setIdPelicula(resultSet.getInt("idPelicula"));
+                pelicula.setTitulo(resultSet.getString("titulo"));
+                
+                pelicula.add(pelicula);
+            }
+            preparedStatement.close();
+        } catch (Exception ex) {
+            System.out.println("Error al obtener las peliculas: " + ex.getMessage());
+        }
+        
+        return peliculas;
+    }
     
 }
 
