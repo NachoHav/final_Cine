@@ -2,6 +2,10 @@ package cine.controlador;
 
 import cine.modelo.Sala;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SalaData {
@@ -100,6 +104,33 @@ public class SalaData {
         }
         
         return sala;
+    }
+    
+    public List<Sala> obtenerSalas(){
+         List<Sala> salas = new ArrayList();
+         
+        try {   
+            String sql = "SELECT * FROM Sala";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            Sala sala;
+            
+            while(rs.next()){
+                sala = new Sala();
+                sala.setIdSala(rs.getInt("id"));
+                sala.setUbicacion(rs.getString("ubicacion"));
+                
+                salas.add(sala);
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("No se pudo obtener las salas");
+        }
+        return salas;
     }
     
 }
