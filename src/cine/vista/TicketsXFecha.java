@@ -32,6 +32,9 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         td = new TicketData(con);
         armarEncabezadosTabla();*/
+        cargarAnios();
+        cargarMeses();
+        jCBDia.setEnabled(false);
         
     }
 
@@ -50,7 +53,9 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         jBBuscar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jBVaciar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jCBDia = new javax.swing.JComboBox<>();
+        jCBMes = new javax.swing.JComboBox<>();
+        jCAnio = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -79,38 +84,43 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
 
         jBVaciar.setText("Vaciar");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setText("Seleccione una fecha:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
-                    .addComponent(jSeparator2)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                            .addComponent(jSeparator2)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addComponent(jBVaciar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(jBVaciar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(103, 103, 103)
+                .addGap(121, 121, 121)
+                .addComponent(jCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBMes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCBDia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBBuscar)
-                .addGap(113, 113, 113))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBBuscar)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -131,11 +141,40 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         //cargarDatos();
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    private void cargarAnios(){
+        int añoActual = LocalDate.now().getYear();
+        for(int i=añoActual ; i >= 2000; i--){
+            jCAnio.addItem(i+"");
+        }
+    }
+    
+    private void cargarMeses(){
+        int mesActual = LocalDate.now().getMonthValue();
+        for(int i=1 ; i <= 12; i++){
+            jCBMes.addItem(i+"");
+        }
+    }
+    
+    private void cargarDias(){
+        jCBDia.setEnabled(true);
+        int mes = Integer.parseInt((String)jCBMes.getSelectedItem());
+        int año = Integer.parseInt((String)jCAnio.getSelectedItem());
+        boolean bisiesto = año % 4 == 0;
+        int diasMes = 30;
+        //1, 3, 5, 7, 8, 10 y 12.
+        if(mes == 3 || mes == 6 || mes == 9 || mes == 11){
+            System.out.println(mes);
+        }else if(mes == 1){
+            System.out.println("mes2");
+        }
+        
+    }
+    
     private void borrarFilas(){
-        /*int cantidadFilas = modelo.getRowCount()-1;
+        int cantidadFilas = modelo.getRowCount()-1;
         for(int i=cantidadFilas; i>=0; i--){
             modelo.removeRow(i);
-        }*/
+        }
     }
     
     private void cargarDatos(){
@@ -173,7 +212,9 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBVaciar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jCAnio;
+    private javax.swing.JComboBox<String> jCBDia;
+    private javax.swing.JComboBox<String> jCBMes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
