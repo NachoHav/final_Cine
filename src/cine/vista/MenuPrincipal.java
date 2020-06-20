@@ -350,10 +350,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         jEscritorio.removeAll();
         jEscritorio.repaint();
-        SalasXPelicula sxp = new SalasXPelicula();
-        sxp.setVisible(true);
-        jEscritorio.add(sxp);
-        jEscritorio.moveToFront(sxp);
+        TicketsXPelicula txp = new TicketsXPelicula();
+        txp.setVisible(true);
+        jEscritorio.add(txp);
+        jEscritorio.moveToFront(txp);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
