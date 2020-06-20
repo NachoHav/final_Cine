@@ -203,6 +203,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu7.add(jMenuItem11);
 
         jMenuItem12.setText("Informe de tickets por pelicula");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem12);
 
         jMenuBar1.add(jMenu7);
@@ -341,6 +346,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jEscritorio.add(psh);
         jEscritorio.moveToFront(psh);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        SalasXPelicula sxp = new SalasXPelicula();
+        sxp.setVisible(true);
+        jEscritorio.add(sxp);
+        jEscritorio.moveToFront(sxp);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
      * @param args the command line arguments
