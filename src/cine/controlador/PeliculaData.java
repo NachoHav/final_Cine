@@ -126,7 +126,7 @@ public class PeliculaData {
                 pelicula.setIdPelicula(resultSet.getInt("idPelicula"));
                 pelicula.setTitulo(resultSet.getString("titulo"));
                 
-                pelicula.add(pelicula);
+                peliculas.add(pelicula);
             }
             preparedStatement.close();
         } catch (Exception ex) {
