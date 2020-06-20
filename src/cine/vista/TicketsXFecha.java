@@ -36,7 +36,6 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         cargarAnios();
         cargarMeses();
         jCBDia.setEnabled(false);
-        
     }
 
     /**
@@ -53,7 +52,6 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jBBuscar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jBVaciar = new javax.swing.JButton();
         jCBDia = new javax.swing.JComboBox<>();
         jCBMes = new javax.swing.JComboBox<>();
         jCAnio = new javax.swing.JComboBox<>();
@@ -86,7 +84,11 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
             }
         });
 
-        jBVaciar.setText("Vaciar");
+        jCBDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBDiaActionPerformed(evt);
+            }
+        });
 
         jCBMes.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -124,19 +126,14 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
                             .addComponent(jSeparator2)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(243, 243, 243)
-                                .addComponent(jBVaciar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(jCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCBMes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCBDia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBBuscar)))
+                        .addGap(121, 121, 121)
+                        .addComponent(jCAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBMes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCBDia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBBuscar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -168,8 +165,6 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBVaciar)
                 .addContainerGap())
         );
 
@@ -194,6 +189,10 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
     private void jCAnioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCAnioItemStateChanged
         cargarDias();
     }//GEN-LAST:event_jCAnioItemStateChanged
+
+    private void jCBDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBDiaActionPerformed
+        
+    }//GEN-LAST:event_jCBDiaActionPerformed
 
     private void cargarAnios(){
         int añoActual = LocalDate.now().getYear();
@@ -280,7 +279,6 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jBVaciar;
     private javax.swing.JComboBox<String> jCAnio;
     private javax.swing.JComboBox<String> jCBDia;
     private javax.swing.JComboBox<String> jCBMes;
