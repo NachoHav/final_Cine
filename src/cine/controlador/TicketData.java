@@ -15,7 +15,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,17 +28,19 @@ import java.util.List;
 public class TicketData 
 {
     private Connection con = null;
+    private Conexion con2;
 
     public TicketData(Conexion conexion) 
     {
         con = conexion.getConexion();
+        con2 = conexion;
     }
     
     public void generarTicket(Ticket ticket)
     {
         try 
         {
-            String query = "INSERT INTO ticket (idCliente,idProyeccion,idButaca,fecha_ticket,monto,estado,metodo_pago) VALUES (?,?,?,?,?,?)";
+            String query = "INSERT INTO ticket (idCliente,idProyeccion,idButaca,fecha_ticket,monto,estado,metodo_pago) VALUES (?,?,?,?,?,?,?)";
 
             PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1,ticket.getCliente().getIdCliente());
@@ -148,5 +153,48 @@ public class TicketData
         }    
         
         return butacas;
+    }
+    
+    public List<Ticket> obtenerTicketXFecha(LocalDate fecha)
+    {
+        List<Ticket> ticketsXFecha = new ArrayList<Ticket>();
+        ClienteData cd = new ClienteData(con2);
+        ProyeccionData pd = new ProyeccionData(con2);
+    
+        try 
+        {
+            String query = "SELECT * FROM ticket WHERE fecha_ticket = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            
+            //java.sql.Date fechaFix = new java.sql.Date(fecha.getTime());
+
+            statement.setObject(1, fecha);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            Ticket ticket;
+            
+            while(resultSet.next())
+            {
+                ticket = new Ticket();
+                ticket.setIdTicket(resultSet.getInt("idTicket"));
+                ticket.setCliente(cd.buscarcliente(resultSet.getInt("idCliente")));
+                ticket.setProyeccion(pd.buscarProyeccion(resultSet.getInt("idProyeccion")));
+                //LocalDate localDate = resultSet.getDate("fecha_ticket").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); 
+                //ticket.setFecha_ticket(localDate);
+                ticket.setMonto(resultSet.getDouble("monto"));
+                ticket.setMetodo_pago(resultSet.getString("metodo_pago"));
+                
+                ticketsXFecha.add(ticket);
+            }      
+            statement.close();
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Obtención de tickets: " + ex.getMessage());
+            
+        }
+        
+        return ticketsXFecha;
     }
 }

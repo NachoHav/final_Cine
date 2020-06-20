@@ -6,6 +6,7 @@
 package cine;
 
 import cine.controlador.*;
+import cine.modelo.Butaca;
 import cine.modelo.Cliente;
 import cine.modelo.Pelicula;
 import cine.modelo.Proyeccion;
@@ -13,6 +14,7 @@ import cine.modelo.Sala;
 import cine.modelo.Ticket;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class testCine
         PeliculaData pd = new PeliculaData(con);
         ProyeccionData prd = new ProyeccionData(con);
         SalaData sd = new SalaData(con);
+        TicketData td = new TicketData(con);
+        ButacaData bda = new ButacaData(con);
         
         // PRUEBAS PARA LA ENTREGA DEL 14/6 - NO BORRAR-
         // Alta, baja y modificacion de Clientes:
@@ -83,6 +87,13 @@ public class testCine
         
         Proyeccion prueba1 = prd.buscarProyeccion(3);
         System.out.println(prueba1.getPelicula().getTitulo());
+        Butaca b = new Butaca(s, "A", "B");
+        bda.altaButaca(b);
+        
+        
+        Ticket t = new Ticket(cliente1, p, b, LocalDate.of(2020, Month.JUNE, 20), 30, true, "prueba");
+        td.generarTicket(t);
+        
         
         //System.out.println(prd.buscarProyeccionXSalaYHorario(1, LocalTime.of(22, 30)).getIdProyeccion());
         
