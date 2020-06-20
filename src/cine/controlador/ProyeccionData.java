@@ -203,30 +203,29 @@ public class ProyeccionData {
         return proyeccionesXPelicula;
     }
     
-    /*public List<Proyeccion> obtenerProyecciones(Sala sala,LocalDate horario)
+    public List<Proyeccion> obtenerProyecciones()
     {
         List<Proyeccion> proyecciones = new ArrayList<Proyeccion>();
     
         try 
         {
-            String query = "SELECT * FROM proyeccion "
-                            + "WHERE (proyeccion.idSala = ?) AND "
-                            + "((proyeccion.horario_desde <= '?') AND (proyeccion.horario_hasta >= '?'))";
+            String query = "SELECT * FROM proyeccion;";
+                           
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1, sala.getIdSala());
-            statement.setObject(2, horario);
-            statement.setObject(3, horario);
-            
             ResultSet resultSet = statement.executeQuery();
             
             Proyeccion proyeccion;
+            PeliculaData pd = new PeliculaData(con2);
+            SalaData sd = new SalaData(con2);
             
             while(resultSet.next())
             {
                 proyeccion = new Proyeccion();
                 proyeccion.setIdProyeccion(resultSet.getInt("idProyeccion"));
-                proyeccion.setPelicula(resultSet.getInt("idPelicula"));              
-                proyeccion.setSala(resultSet.getInt("idSala"));
+                proyeccion.setPelicula(pd.buscarPelicula(resultSet.getInt("idPelicula")));            
+                proyeccion.setSala(sd.buscarSala(resultSet.getInt("idSala")));
+                proyeccion.setHoraDesde(resultSet.getTime("horario_desde").toLocalTime());
+                proyeccion.setHoraHasta(resultSet.getTime("horario_hasta").toLocalTime());
 
                 proyecciones.add(proyeccion);
             }      
@@ -234,10 +233,10 @@ public class ProyeccionData {
         } 
         catch (SQLException ex) 
         {
-            System.out.println("ERROR: Obtención de alumnos: " + ex.getMessage());
+            System.out.println("ERROR: Obtención de proyecciones: " + ex.getMessage());
         }
         
         return proyecciones;
-    }*/
+    }
        
 }
