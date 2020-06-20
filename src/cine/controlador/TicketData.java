@@ -194,4 +194,76 @@ public class TicketData
         
         return ticketsXFecha;
     }
+    
+    public List<Ticket> obtenerTicketXPelicula(int idPelicula)
+    {
+        List<Ticket> ticketsXPelicula = new ArrayList<Ticket>();
+        ClienteData cd = new ClienteData(con2);
+        ProyeccionData pd = new ProyeccionData(con2);
+    
+        try 
+        {
+            String query = "SELECT * FROM ticket WHERE idPelicula =" + idPelicula +";";
+            PreparedStatement statement = con.prepareStatement(query);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            Ticket ticket;
+            
+            while(resultSet.next())
+            {
+                ticket = new Ticket();
+                ticket.setIdTicket(resultSet.getInt("idTicket"));
+                ticket.setCliente(cd.buscarcliente(resultSet.getInt("idCliente")));
+                ticket.setProyeccion(pd.buscarProyeccion(resultSet.getInt("idProyeccion")));
+                ticket.setFecha_ticket(resultSet.getDate("fecha_ticket").toLocalDate());
+                ticket.setMonto(resultSet.getDouble("monto"));
+                ticket.setMetodo_pago(resultSet.getString("metodo_pago"));
+                
+                ticketsXPelicula.add(ticket);
+            }      
+            statement.close();
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Obtención de tickets por pelicula: " + ex.getMessage());
+        }
+        
+        return ticketsXPelicula;
+    }
+    
+    public List<Ticket> obtenerTickets ()
+    {
+        List<Ticket> tickets = new ArrayList<>();
+        ClienteData cd = new ClienteData(con2);
+        ProyeccionData pd = new ProyeccionData(con2);
+        
+        try {
+            String sql = "SELECT * FROM ticket;";
+            
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            Ticket ticket;
+            
+            while(resultSet.next()){
+                ticket = new Ticket();
+                ticket = new Ticket();
+                ticket.setIdTicket(resultSet.getInt("idTicket"));
+                ticket.setCliente(cd.buscarcliente(resultSet.getInt("idCliente")));
+                ticket.setProyeccion(pd.buscarProyeccion(resultSet.getInt("idProyeccion")));
+                ticket.setFecha_ticket(resultSet.getDate("fecha_ticket").toLocalDate());
+                ticket.setMonto(resultSet.getDouble("monto"));
+                ticket.setMetodo_pago(resultSet.getString("metodo_pago"));
+                
+                tickets.add(ticket);
+            }
+            preparedStatement.close();
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR: Obtencion de todos los tickets: " + ex.getMessage());
+        }
+        
+        return tickets;
+    }
 }

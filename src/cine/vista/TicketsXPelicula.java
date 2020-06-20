@@ -5,17 +5,42 @@
  */
 package cine.vista;
 
-/**
- *
- * @author Arezlon
- */
-public class TicketsXPelicula extends javax.swing.JInternalFrame {
+import cine.controlador.*;
+import cine.modelo.*;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
-    /**
-     * Creates new form TicketsXPelicula
-     */
+
+public class TicketsXPelicula extends javax.swing.JInternalFrame {
+    
+    private DefaultTableModel modelo;
+    private ArrayList<Pelicula> listaPeliculas;
+    private ArrayList<Ticket> listaTickets;
+    private PeliculaData peliculaData;
+    private TicketData ticketData;
+    private Conexion con;
+    
+
     public TicketsXPelicula() {
         initComponents();
+        try {
+            con = new Conexion();
+            
+            peliculaData = new PeliculaData(con);
+            ticketData = new TicketData(con);
+            listaPeliculas = (ArrayList)peliculaData.obtenerPeliculas();
+            listaTickets = (ArrayList)ticketData.obtenerTickets();
+            
+            modelo = new DefaultTableModel();
+            
+            cargarCbPeliculas();
+            armarCabeceraTabla();
+            borrarFilasTabla();
+            cargarDatosTabla();
+            
+        } catch (Exception e) {
+        }
+        
     }
 
     /**
@@ -27,21 +52,122 @@ public class TicketsXPelicula extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTTickets = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jCPeliculas = new javax.swing.JComboBox<>();
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setText("Tickets Por Pelicula");
+
+        jTTickets.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTTickets);
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setText("Pelicula:");
+
+        jCPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCPeliculasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
+                .addGap(213, 213, 213))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCPeliculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCPeliculasActionPerformed
+        borrarFilasTabla();
+        cargarCbPeliculas();
+    }//GEN-LAST:event_jCPeliculasActionPerformed
+    
+    
+    private void cargarCbPeliculas() 
+    {
+        for(Pelicula pelicula : listaPeliculas)
+            jCPeliculas.addItem(pelicula);
+    }
+    private void armarCabeceraTabla()
+    {
+        ArrayList<Object> columnas = new ArrayList<>();
+        columnas.add("Fecha Ticket");
+        columnas.add("Pelicula");
+        columnas.add("Hora Desde");
+        columnas.add("Hora Hasta");
+        columnas.add("Butaca");
+        columnas.add("Metodo Pago");
+        
+        for(Object it : columnas)
+            modelo.addColumn(it);
+        
+        jTTickets.setModel(modelo);
+    }
+    private void borrarFilasTabla()
+    {
+        int a = modelo.getRowCount()-1;
+        for(int i =a; i >= 0; i--)
+            modelo.removeRow(i);
+    }
+    private void cargarDatosTabla()
+    {
+        Pelicula pelicula = (Pelicula)jCPeliculas.getSelectedItem();
+        listaTickets = (ArrayList)ticketData.obtenerTicketXPelicula(pelicula.getIdPelicula());
+        
+        for(Ticket t : listaTickets)
+            modelo.addRow(new Object[]{t.getFecha_ticket(), t.getProyeccion().getPelicula().getTitulo(),
+                                       t.getProyeccion().getHoraDesde(), t.getProyeccion().getHoraHasta(),
+                                       t.getButaca().getIdButaca(), t.getMetodo_pago()});
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Pelicula> jCPeliculas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTTickets;
     // End of variables declaration//GEN-END:variables
+
+   
 }
