@@ -32,6 +32,8 @@ public class SalasXPelicula extends javax.swing.JInternalFrame {
             
             cargaCbPeliculas();
             armarCabeceraTabla();
+            borrarFilasTabla();
+            cargarDatosTabla();
             
         } catch (Exception e) {
         }
@@ -71,6 +73,11 @@ public class SalasXPelicula extends javax.swing.JInternalFrame {
         jLabel1.setText("Salas por Peliculas");
 
         jCPeliculas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jCPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCPeliculasActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Pelicula");
@@ -123,6 +130,11 @@ public class SalasXPelicula extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jCPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCPeliculasActionPerformed
+        borrarFilasTabla();
+        cargarDatosTabla();
+    }//GEN-LAST:event_jCPeliculasActionPerformed
+
     private void cargaCbPeliculas()
     {
         for(Pelicula pelicula : listaPeliculas)
@@ -143,6 +155,21 @@ public class SalasXPelicula extends javax.swing.JInternalFrame {
         jTSalas.setModel(modelo);
     }
     
+    private void cargarDatosTabla()
+    {
+        Pelicula pelicula = (Pelicula)jCPeliculas.getSelectedItem();
+        listaProyecciones = (ArrayList)proyeccionData.obtenerProyeccionesXPelicula(pelicula.getIdPelicula());
+        
+        for(Proyeccion p : listaProyecciones)
+            modelo.addRow(new Object[]{p.getSala().getIdSala(), p.getHoraDesde(), p.getHoraHasta(), p.getSala().getUbicacion()});
+    }
+    
+    private void borrarFilasTabla()
+    {
+        int a = modelo.getRowCount()-1;
+        for(int i = a; i >= 0; i--)
+            modelo.removeRow(i);
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
