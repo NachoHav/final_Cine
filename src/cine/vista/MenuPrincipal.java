@@ -174,6 +174,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu7.add(jMenuItem8);
 
         jMenuItem9.setText("Lista salas donde se proyecta una pelicula");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem9);
 
         jMenuItem10.setText("Listar clientes por fecha");
@@ -304,6 +309,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jEscritorio.add(ticketsXFecha);
         jEscritorio.moveToFront(ticketsXFecha);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        SalasXPelicula salasXPelicula = new SalasXPelicula();
+        salasXPelicula.setVisible(true);
+        jEscritorio.add(salasXPelicula);
+        jEscritorio.moveToFront(salasXPelicula);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
