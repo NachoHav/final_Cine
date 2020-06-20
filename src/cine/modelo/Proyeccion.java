@@ -64,4 +64,11 @@ public class Proyeccion {
     public void setHoraHasta(LocalTime horaHasta) {
         this.horaHasta = horaHasta;
     }   
+
+    @Override
+    public String toString() {
+        return horaDesde + " - " + horaHasta;
+    }
+    
+    
 }

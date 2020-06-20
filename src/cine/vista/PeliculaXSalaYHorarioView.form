@@ -32,8 +32,8 @@
                               </Group>
                               <EmptySpace min="131" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextField2" pref="107" max="32767" attributes="0"/>
-                                  <Component id="jcbSalas" max="32767" attributes="0"/>
+                                  <Component id="jcbSalas" pref="107" max="32767" attributes="0"/>
+                                  <Component id="jcbHorarios" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -64,14 +64,14 @@
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcbSalas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jcbHorarios" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jtTituloPelicula" min="-2" max="-2" attributes="0"/>
@@ -105,8 +105,6 @@
         <Property name="text" type="java.lang.String" value="Horario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -130,6 +128,19 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Sala&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jcbHorarios">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbHorariosActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Proyeccion&gt;"/>
       </AuxValues>
     </Component>
   </SubComponents>
