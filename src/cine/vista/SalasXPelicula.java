@@ -31,6 +31,8 @@ public class SalasXPelicula extends javax.swing.JInternalFrame {
             listaProyecciones = (ArrayList)proyeccionData.obtenerProyecciones();
             modelo = new DefaultTableModel();
             
+            modelo = new DefaultTableModel();
+            
             cargaCbPeliculas();
             armarCabeceraTabla();
             borrarFilasTabla();
