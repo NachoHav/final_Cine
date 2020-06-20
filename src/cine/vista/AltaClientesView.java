@@ -9,6 +9,7 @@ import cine.controlador.ClienteData;
 import cine.controlador.Conexion;
 import cine.modelo.Cliente;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 /**
  *
@@ -70,16 +71,31 @@ public class AltaClientesView extends javax.swing.JInternalFrame {
                 jTNombreClienteActionPerformed(evt);
             }
         });
+        jTNombreCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTValidacionTextosKeyTyped(evt);
+            }
+        });
 
         jTApellidoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTApellidoClienteActionPerformed(evt);
             }
         });
+        jTApellidoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTValidacionTextosKeyTyped(evt);
+            }
+        });
 
         jTDniCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTDniClienteActionPerformed(evt);
+            }
+        });
+        jTDniCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTDniClienteKeyTyped(evt);
             }
         });
 
@@ -197,6 +213,22 @@ public class AltaClientesView extends javax.swing.JInternalFrame {
     private void jBVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVaciarActionPerformed
         vaciarTodo();
     }//GEN-LAST:event_jBVaciarActionPerformed
+
+    private void jTValidacionTextosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTValidacionTextosKeyTyped
+        char ingreso = evt.getKeyChar();
+        String campo = ((JTextField)evt.getSource()).getText()+ingreso;
+        if(!Character.isAlphabetic(ingreso) || campo.length() > 25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTValidacionTextosKeyTyped
+
+    private void jTDniClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDniClienteKeyTyped
+        char ingreso = evt.getKeyChar();
+        String campo = ((JTextField)evt.getSource()).getText()+ingreso;
+        if(!Character.isDigit(ingreso) || campo.length() > 8){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTDniClienteKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

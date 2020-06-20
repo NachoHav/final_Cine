@@ -138,16 +138,19 @@
     <Component class="javax.swing.JTextField" name="jTNombreCliente">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTNombreClienteActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTValidacionTextosKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTApellidoCliente">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTApellidoClienteActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTValidacionTextosKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTDniCliente">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTDniClienteActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTDniClienteKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBGuardar">
