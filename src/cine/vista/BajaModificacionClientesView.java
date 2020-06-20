@@ -5,19 +5,30 @@
  */
 package cine.vista;
 
+import cine.controlador.ClienteData;
+import cine.controlador.Conexion;
 import cine.modelo.Cliente;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JTextField;
 
 /**
  *
  * @author Arezlon
  */
 public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
-
+    private ClienteData clienteData;
+    private Conexion con;
+    private ArrayList<Cliente> listaClientes;
     /**
      * Creates new form BajaModificacionClientesView
      */
     public BajaModificacionClientesView() {
         initComponents();
+        con = new Conexion();
+        clienteData = new ClienteData(con);
+        
+        cargarDesplegableClientes();
     }
 
     /**
@@ -62,9 +73,26 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Apellido");
 
+        jCBClientes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBClientesItemStateChanged(evt);
+            }
+        });
+
+        jTDniCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTDniClienteKeyTyped(evt);
+            }
+        });
+
         jTNombreCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTNombreClienteActionPerformed(evt);
+            }
+        });
+        jTNombreCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTValidacionNombresKeyTyped(evt);
             }
         });
 
@@ -73,51 +101,49 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
                 jTApellidoClienteActionPerformed(evt);
             }
         });
+        jTApellidoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTValidacionNombresKeyTyped(evt);
+            }
+        });
 
         jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jBModificar.setText("Modificar");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
 
         jBVaciar.setText("Vaciar");
+        jBVaciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVaciarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jLAlerta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLAlerta.setText("placeholder cliente editado/eliminado");
+        jLAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAlerta.setText(" ");
+        jLAlerta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLAlerta)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTNombreCliente)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(82, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator2))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBModificar)
@@ -126,6 +152,32 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBEliminar)
                 .addGap(87, 87, 87))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCBClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTNombreCliente)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jTApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(82, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addComponent(jLAlerta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,17 +193,17 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
                     .addComponent(jTDniCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jBBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLAlerta)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jLAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,6 +216,13 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargarDesplegableClientes(){
+        jCBClientes.removeAllItems();
+        listaClientes=(ArrayList)clienteData.obtenerClientes();
+        for (Cliente c:listaClientes) {
+            jCBClientes.addItem(c);
+        }
+    }
     private void jTNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNombreClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTNombreClienteActionPerformed
@@ -171,6 +230,88 @@ public class BajaModificacionClientesView extends javax.swing.JInternalFrame {
     private void jTApellidoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTApellidoClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTApellidoClienteActionPerformed
+
+    private void jCBClientesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBClientesItemStateChanged
+        Cliente c = (Cliente)jCBClientes.getSelectedItem();
+        
+        if(c != null){
+            jTNombreCliente.setText(c.getNombre());
+            jTApellidoCliente.setText(c.getApellido());
+            jTDniCliente.setText(c.getDni()+"");
+            jBEliminar.setEnabled(true); //HACER LO MISMO CON TODOS LOS BOTONES QUE NECESITAN UN CLIENTE
+        }
+    }//GEN-LAST:event_jCBClientesItemStateChanged
+
+    private void limpiar(){
+        jTDniCliente.setText("");
+        jTNombreCliente.setText("");
+        jTApellidoCliente.setText("");
+        jBEliminar.setEnabled(false);
+    }
+    private void jBVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVaciarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jBVaciarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        int id = ((Cliente)jCBClientes.getSelectedItem()).getIdCliente();
+        Color colorExito = new Color(7, 110, 46);
+        jLAlerta.setText("Cliente "+jTNombreCliente.getText()+" eliminado correctamente");
+        jLAlerta.setForeground(colorExito);
+        clienteData.bajaCliente(id);
+        limpiar();
+        cargarDesplegableClientes();
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        long dni = Long.parseLong(jTDniCliente.getText()) ;
+        Cliente busquedaCliente = clienteData.buscarClienteXDni(dni);
+        
+        if(busquedaCliente.getIdCliente() > 0){
+            jTNombreCliente.setText(busquedaCliente.getNombre()+"");
+            jTApellidoCliente.setText(busquedaCliente.getApellido()+"");
+        }else{
+            Color colorError = new Color(255, 0, 0);
+            jLAlerta.setText("No se encontró un cliente con el DNI ingresado.");
+            jLAlerta.setForeground(colorError);
+            limpiar();
+        }
+        
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        int idCliente = ((Cliente)jCBClientes.getSelectedItem()).getIdCliente();
+        if(idCliente > 0){
+            int id = idCliente;
+            String nombre = jTNombreCliente.getText();
+            String apellido = jTApellidoCliente.getText();
+            Long dni = Long.parseLong(jTDniCliente.getText());
+            
+            Cliente clienteIngresado = new Cliente(dni,nombre,apellido);
+            clienteIngresado.setIdCliente(id);
+            clienteData.modificarCliente(clienteIngresado);
+            
+            Color colorExito = new Color(7, 110, 46);
+            jLAlerta.setText("Cliente "+jTNombreCliente.getText()+ " "+jTApellidoCliente.getText()+" modificado correctamente");
+            jLAlerta.setForeground(colorExito);
+            cargarDesplegableClientes();
+        }
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jTDniClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDniClienteKeyTyped
+        char ingreso = evt.getKeyChar();
+        String campo = ((JTextField)evt.getSource()).getText()+ingreso;
+        if(!Character.isDigit(ingreso) || campo.length() > 8){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTDniClienteKeyTyped
+
+    private void jTValidacionNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTValidacionNombresKeyTyped
+        char ingreso = evt.getKeyChar();
+        String campo = ((JTextField)evt.getSource()).getText()+ingreso;
+        if(!Character.isAlphabetic(ingreso) || campo.length() > 25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTValidacionNombresKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
