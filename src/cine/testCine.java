@@ -82,8 +82,8 @@ public class testCine
 //        // Alta, baja y modificacion de Pelicula:
 //        
 //        // Alta de Pelicula
-//        Pelicula pelicula1 = new Pelicula("Titulo de prueba 1");
-//        pd.altaPelicula(pelicula1);
+        Pelicula pelicula1 = new Pelicula("Titulo de prueba 1");
+        pd.altaPelicula(pelicula1);
 //        
 //        // Modificacion de Pelicula:
 //        Pelicula pelicula2 = new Pelicula("Titulo de prueba 2");
