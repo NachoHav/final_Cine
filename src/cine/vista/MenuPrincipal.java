@@ -176,6 +176,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
 
         jMenuItem8.setText("Listar peliculas por sala y horario");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem8);
 
         jMenuItem9.setText("Lista salas donde se proyecta una pelicula");
@@ -325,13 +330,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+
+    }//GEN-LAST:event_jMenu7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         jEscritorio.removeAll();
         jEscritorio.repaint();
         PeliculaXSalaYHorarioView psh = new PeliculaXSalaYHorarioView();
         psh.setVisible(true);
         jEscritorio.add(psh);
         jEscritorio.moveToFront(psh);
-    }//GEN-LAST:event_jMenu7ActionPerformed
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
