@@ -20,12 +20,23 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
 
     public PeliculaXSalaYHorarioView() {
         initComponents();
+        
         con = new Conexion();
         salaData = new SalaData(con);
-        listaSalas = (ArrayList)salaData.
+        listaSalas = (ArrayList)salaData.obtenerSalas();
+        proyeccionData = new ProyeccionData(con);
+        listaProyecciones = (ArrayList)proyeccionData.obtenerProyecciones();
+        
+        cargarDesplegableSalas();
     }
 
-
+    private void cargarDesplegableSalas(){
+        for(Sala sal: listaSalas){
+            jcbSalas.addItem(sal);
+        }
+    }
+   
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
