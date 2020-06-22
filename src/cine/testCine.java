@@ -53,6 +53,26 @@ public class testCine
         
         
        Ticket t = new Ticket(cliente1, p, b, LocalDate.of(2020, Month.JUNE, 20), 30, true, "Mercado Pago");
+       
+       //Cleinte 2
+       td.generarTicket(t);
+       
+       Cliente cliente2 = new Cliente(1,"Nombre","Apellido");
+        cd.altaCliente(cliente1);
+        
+        Pelicula pelicula2 = new Pelicula("Terminator");
+        pd.altaPelicula(pelicula1);
+        
+        Sala s2 = new Sala("Sala 2");
+        sd.altaSala(s);
+        Proyeccion p2  = new Proyeccion(pelicula1, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
+        prd.altaProyeccion(p);
+        
+        Butaca b2 = new Butaca(s, "A", "1");
+        bda.altaButaca(b);
+        
+        
+       Ticket t2 = new Ticket(cliente1, p, b, LocalDate.of(2020, Month.JUNE, 20), 30, true, "Visa");
        td.generarTicket(t);
        
        //
