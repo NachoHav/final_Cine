@@ -24,6 +24,7 @@ public class ClientesXFecha extends javax.swing.JInternalFrame {
     private TicketData td;
     private Conexion con;
     private ArrayList<Cliente> listaClientes;
+    private ArrayList<Ticket> listaTickets;
     private ClienteData cd;
     
     public ClientesXFecha() {
@@ -104,18 +105,19 @@ public class ClientesXFecha extends javax.swing.JInternalFrame {
         int mesBusqueda = Integer.parseInt((String)jcMes.getSelectedItem());
         int diaBusqueda = Integer.parseInt((String)jcDia.getSelectedItem());
         LocalDate fechaBusqueda = LocalDate.of(añoBusqueda, Month.of(mesBusqueda), diaBusqueda);
-//        listaClientes = (ArrayList)
+        listaTickets = (ArrayList)td.obtenerTicketXFecha(fechaBusqueda);
         
-//        for(Ticket t:listaTickets){
-//            modelo.addRow(new Object[]{t.getIdTicket(),t.getCliente().getNombre(),t.getProyeccion().getPelicula().getTitulo(),t.getFecha_ticket(),t.getMonto(),t.getMetodo_pago()});
-//        }
+        for(Ticket t:listaTickets){
+            modelo.addRow(new Object[]{t.getCliente().getIdCliente(),t.getCliente().getNombre(), t.getCliente().getApellido(), t.getProyeccion().getPelicula(), t.getProyeccion().getHoraDesde()});
+        }
     }
     
     private void armarEncabezadosTabla(){
         ArrayList<Object> columnas = new ArrayList<Object>();
         
         columnas.add("ID Cliente");
-        columnas.add("Cliente");
+        columnas.add("Nombre");
+        columnas.add("Apellido");
         columnas.add("Pelicula");
         columnas.add("Horario");        
         for(Object columna:columnas){
@@ -141,6 +143,8 @@ public class ClientesXFecha extends javax.swing.JInternalFrame {
         jcMes = new javax.swing.JComboBox();
         jcDia = new javax.swing.JComboBox();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel1.setText("Clientes por Fecha");
 
@@ -158,6 +162,11 @@ public class ClientesXFecha extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtClientes);
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("Clientes");
@@ -175,21 +184,8 @@ public class ClientesXFecha extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(136, 136, 136))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jcAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(jcMes, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jcDia, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jbBuscar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(156, 156, 156)
@@ -204,15 +200,27 @@ public class ClientesXFecha extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(91, 91, 91)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67)
+                                .addComponent(jcMes, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(jcDia, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(34, 34, 34)
+                        .addComponent(jbBuscar)))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addGap(70, 70, 70)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
@@ -232,6 +240,10 @@ public class ClientesXFecha extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        cargarDatos();
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
