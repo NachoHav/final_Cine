@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-06-2020 a las 18:38:01
+-- Tiempo de generación: 22-06-2020 a las 20:04:00
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `butaca` (
   `idButaca` int(11) NOT NULL,
-  `idSala` int(11) NOT NULL,
+  `idProyeccion` int(11) NOT NULL,
   `fila` varchar(50) NOT NULL,
   `columna` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -110,7 +110,7 @@ CREATE TABLE `ticket` (
 --
 ALTER TABLE `butaca`
   ADD PRIMARY KEY (`idButaca`),
-  ADD KEY `idSala` (`idSala`);
+  ADD KEY `idProyeccion` (`idProyeccion`);
 
 --
 -- Indices de la tabla `cliente`
@@ -195,7 +195,7 @@ ALTER TABLE `ticket`
 -- Filtros para la tabla `butaca`
 --
 ALTER TABLE `butaca`
-  ADD CONSTRAINT `butaca_ibfk_1` FOREIGN KEY (`idSala`) REFERENCES `sala` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `butaca_ibfk_1` FOREIGN KEY (`idProyeccion`) REFERENCES `proyeccion` (`idProyeccion`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `proyeccion`

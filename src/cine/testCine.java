@@ -48,7 +48,7 @@ public class testCine
         Proyeccion p  = new Proyeccion(pelicula1, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
         prd.altaProyeccion(p);
         
-        Butaca b = new Butaca(s, "A", "3");
+        Butaca b = new Butaca(p, "A", "3");
         bda.altaButaca(b);
         
         

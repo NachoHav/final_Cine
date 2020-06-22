@@ -5,14 +5,14 @@ package cine.modelo;
 public class Butaca {
     
     private int idButaca = -1;
-    private Sala sala;
+    private Proyeccion proyeccion;
     private String fila, columna;
 
     public Butaca() {
     }
 
-    public Butaca(Sala sala, String fila, String columna) {
-        this.sala = sala;
+    public Butaca(Proyeccion proyeccion, String fila, String columna) {
+        this.proyeccion = proyeccion;
         this.fila = fila;
         this.columna = columna;
     }
@@ -25,12 +25,12 @@ public class Butaca {
         this.idButaca = idButaca;
     }
 
-    public Sala getSala() {
-        return sala;
+    public Proyeccion getProyeccion() {
+        return proyeccion;
     }
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
+    public void setProyeccion(Proyeccion proyeccion) {
+        this.proyeccion = proyeccion;
     }
 
     public String getFila() {
