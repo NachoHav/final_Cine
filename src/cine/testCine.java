@@ -43,7 +43,7 @@ public class testCine
         Pelicula pelicula1 = new Pelicula("Titulo Pelicula 1");
         pd.altaPelicula(pelicula1);
         
-        Sala s = new Sala("Sala 1");
+        Sala s = new Sala("Sala 1",300);
         sd.altaSala(s);
         Proyeccion p  = new Proyeccion(pelicula1, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
         prd.altaProyeccion(p);

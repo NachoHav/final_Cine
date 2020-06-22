@@ -22,17 +22,20 @@ public class SalaData {
     public void altaSala(Sala sala)
     {
         try {
-            String sql = "INSERT INTO SALA (ubicacion) VALUES (?);";
+            String sql = "INSERT INTO SALA (ubicacion,cantidadButacas) VALUES (?,?);";
             
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, sala.getUbicacion());
+            ps.setInt(2, sala.getCantButacas());
             
             ps.executeUpdate();
             
             ResultSet rs = ps.getGeneratedKeys();
             
-            if (rs.next())
+            if (rs.next()){
                 sala.setIdSala(rs.getInt(1));
+                sala.setCantButacas(rs.getInt(1));
+            }
             else 
                 System.out.println("No se pudo obtener id de sala luego de insertar sala");
             
@@ -63,10 +66,11 @@ public class SalaData {
     public void modificarSala(Sala sala)
     {
         try {
-            String sql = "UPDATE sala SET ubicacion = ? WHERE idSala="+sala.getIdSala()+";";
+            String sql = "UPDATE sala SET ubicacion = ?, cantidadButacas = ? WHERE idSala="+sala.getIdSala()+";";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, sala.getUbicacion());
+            ps.setInt(2, sala.getCantButacas());
             ps.executeUpdate();
             
             ps.close();
@@ -95,6 +99,7 @@ public class SalaData {
             {
                 sala.setIdSala(resultSet.getInt("idSala"));
                 sala.setUbicacion(resultSet.getString("ubicacion"));
+                sala.setCantButacas(resultSet.getInt("cantidadButacas"));
             }      
             statement.close();   
         } 
@@ -121,6 +126,7 @@ public class SalaData {
                 sala = new Sala();
                 sala.setIdSala(rs.getInt("idSala"));
                 sala.setUbicacion(rs.getString("ubicacion"));
+                sala.setCantButacas(rs.getInt("cantidadButacas"));
                 
                 salas.add(sala);
             }

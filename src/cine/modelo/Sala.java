@@ -13,12 +13,14 @@ public class Sala {
     
     private int idSala = -1;
     private String ubicacion;
-
+    private int cantidadButacas;
+   
     public Sala() {
     }
 
-    public Sala(String ubicacion) {
+    public Sala(String ubicacion, int cantidadButacas) {
         this.ubicacion = ubicacion;
+        this.cantidadButacas = cantidadButacas;
     }
 
     public int getIdSala() {
@@ -35,6 +37,14 @@ public class Sala {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
+    }
+    
+    public int getCantButacas() {
+        return cantidadButacas;
+    }
+
+    public void setCantButacas(int cantidadButacas) {
+        this.cantidadButacas = cantidadButacas;
     }
 
     @Override
