@@ -19,13 +19,13 @@ public class ButacaData {
     {
         try 
         {   
-            String sql = "INSERT INTO butaca (idButaca,idSala,fila,columna) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO butaca (idSala,fila,columna) VALUES (?,?,?)";
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, butaca.getIdButaca());
-            ps.setInt(2, butaca.getSala().getIdSala());
-            ps.setString(3, butaca.getFila());
-            ps.setString(4, butaca.getColumna());
+            //ps.setInt(1, butaca.getIdButaca());
+            ps.setInt(1, butaca.getSala().getIdSala());
+            ps.setString(2, butaca.getFila());
+            ps.setString(3, butaca.getColumna());
 
             ps.executeUpdate();
 

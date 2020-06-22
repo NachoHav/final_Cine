@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-06-2020 a las 16:51:40
+-- Tiempo de generación: 22-06-2020 a las 18:38:01
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.5
 
@@ -68,8 +68,8 @@ CREATE TABLE `proyeccion` (
   `idProyeccion` int(11) NOT NULL,
   `idPelicula` int(11) NOT NULL,
   `idSala` int(11) NOT NULL,
-  `horario_desde` time(6) NOT NULL,
-  `horario_hasta` time(6) NOT NULL
+  `horario_desde` time NOT NULL,
+  `horario_hasta` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
