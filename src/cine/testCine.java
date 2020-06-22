@@ -63,12 +63,12 @@ public class testCine
         Pelicula pelicula2 = new Pelicula("Terminator");
         pd.altaPelicula(pelicula1);
         
-        Sala s2 = new Sala("Sala 2");
+
         sd.altaSala(s);
         Proyeccion p2  = new Proyeccion(pelicula1, s, LocalTime.of(22, 30), LocalTime.of(23, 55));
         prd.altaProyeccion(p);
         
-        Butaca b2 = new Butaca(s, "A", "1");
+//        Butaca b2 = new Butaca(s2, "A", "1");
         bda.altaButaca(b);
         
         
