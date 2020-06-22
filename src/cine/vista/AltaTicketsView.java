@@ -283,9 +283,11 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
         Color colorExito = new Color(7, 110, 46);
         double total = calcularTotal();
         
-        
         if(calcularTotal()==0){
             jLAlerta.setText("Error: Seleccione un metodo de pago válido");
+            jLAlerta.setForeground(colorError);
+        }else if(butacaData.comprobarButaca(proyeccion.getIdProyeccion(), fila, columna)){
+            jLAlerta.setText("Error: esa butaca ya está vendida/reservada");
             jLAlerta.setForeground(colorError);
         }else{
             jLAlerta.setText("Ticket generado correctamente");

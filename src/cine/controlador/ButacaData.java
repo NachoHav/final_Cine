@@ -48,4 +48,27 @@ public class ButacaData {
         }
     }
     
+    public boolean comprobarButaca(int idProyeccion, String fila, String columna){
+        
+        boolean encontrado = false;
+        
+        try{
+            String query = "SELECT * FROM butaca WHERE idProyeccion = ? AND fila = ? AND columna = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,idProyeccion);
+            statement.setString(2,fila);
+            statement.setString(3, columna);
+            
+            ResultSet rs = statement.executeQuery();
+            
+            if(rs.first())
+                encontrado = true;
+            
+        }catch(SQLException ex){
+            System.out.println("Error al comprobar la butaca" +ex.getMessage());
+        } 
+        
+        return encontrado;
+    }
+    
 }
