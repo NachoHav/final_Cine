@@ -5,11 +5,18 @@
  */
 package cine.vista;
 
+import cine.controlador.ButacaData;
 import cine.controlador.ClienteData;
 import cine.controlador.Conexion;
 import cine.controlador.ProyeccionData;
+import cine.controlador.TicketData;
+import cine.modelo.Butaca;
 import cine.modelo.Cliente;
 import cine.modelo.Proyeccion;
+import cine.modelo.Ticket;
+import java.awt.Color;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +26,8 @@ import java.util.ArrayList;
 public class AltaTicketsView extends javax.swing.JInternalFrame {
     private ClienteData clienteData;
     private ProyeccionData proyeccionData;
+    private TicketData ticketData;
+    private ButacaData butacaData;
     private Conexion con;
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Proyeccion> listaProyecciones;
@@ -31,7 +40,15 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
         con = new Conexion();
         clienteData = new ClienteData(con);
         proyeccionData = new ProyeccionData(con);
+        ticketData = new TicketData(con);
+        butacaData = new ButacaData(con);
         
+        cargarDesplegableClientes();
+        cargarDesplegableProyecciones();
+        cargarDesplegablesButacas();
+    }
+    
+    private void recargarTodo(){
         cargarDesplegableClientes();
         cargarDesplegableProyecciones();
         cargarDesplegablesButacas();
@@ -52,7 +69,39 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
     }
      
      private void cargarDesplegablesButacas(){
+         jCBColumna.removeAllItems();
+         jCBFila.removeAllItems();
+         Proyeccion seleccionada = (Proyeccion)jCBProyecciones.getSelectedItem();
+         int totalButacas = seleccionada.getSala().getCantButacas();
+         int row = totalButacas/20;
          
+         for(int i=1; i<=20;i++){
+             jCBColumna.addItem("Columna "+i);
+         }
+         
+         for(int i=1; i<=row;i++){
+             jCBFila.addItem("Fila "+i);
+         }
+         
+     }
+     
+     private double calcularTotal(){
+         int metodoPago = (int)jCBMetodo.getSelectedIndex();
+         
+         switch(metodoPago){
+             case 0:
+                 return 0;
+             case 1:
+                 return 189.99;
+             case 2:
+                 return 229.99;
+             case 3:
+                 return 229.99;
+             case 4:
+                 return 249.99;
+             default:
+                 return 0;   
+         }
      }
 
     /**
@@ -87,6 +136,12 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Cliente:");
 
+        jCBProyecciones.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBProyeccionesItemStateChanged(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Proyecciones:");
 
@@ -94,6 +149,11 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
         jLabel3.setText("Butaca:");
 
         jCBMetodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción...", "Efectivo", "Tarjeta de débito", "Tarjeta de crédito", "MercadoPago" }));
+        jCBMetodo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBMetodoItemStateChanged(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Método de pago:");
@@ -109,6 +169,11 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
         jLAlerta.setText("-PLACEHOLDER ALERTAS-");
 
         jBImprimir.setText("Imprimir");
+        jBImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,9 +192,9 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
                                     .addComponent(jCBClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jCBProyecciones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCBFila, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jCBFila, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jCBColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jCBColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(3, 3, 3))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,6 +265,46 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jCBProyeccionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBProyeccionesItemStateChanged
+        cargarDesplegablesButacas();
+    }//GEN-LAST:event_jCBProyeccionesItemStateChanged
+
+    private void jBImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImprimirActionPerformed
+        Cliente cliente = (Cliente)jCBClientes.getSelectedItem();
+        Proyeccion proyeccion = (Proyeccion)jCBProyecciones.getSelectedItem();
+        
+        String fila = (String)jCBFila.getSelectedItem();
+        String columna = (String)jCBColumna.getSelectedItem();
+                
+        //Butaca butaca = new Butaca(proyeccion, fila, columna);
+        
+        Color colorError = new Color(255, 0, 0);
+        Color colorExito = new Color(7, 110, 46);
+        double total = calcularTotal();
+        
+        
+        if(calcularTotal()==0){
+            jLAlerta.setText("Error: Seleccione un metodo de pago válido");
+            jLAlerta.setForeground(colorError);
+        }else{
+            jLAlerta.setText("Ticket generado correctamente");
+            jLAlerta.setForeground(colorExito);
+            Butaca alta = new Butaca(proyeccion, fila, columna);
+            butacaData.altaButaca(alta);
+            String metodoPago = (String)jCBMetodo.getSelectedItem();
+            Ticket ticketNuevo = new Ticket(cliente, proyeccion, alta, LocalDate.now(), 30, true, metodoPago);
+            ticketData.generarTicket(ticketNuevo);
+            recargarTodo();
+        }
+        //LocalTime horaDesde = LocalTime.of(Integer.parseInt((String)jCBDesdeHora.getSelectedItem()), Integer.parseInt((String)jCBDesdeMinutos.getSelectedItem()));
+        //LocalTime horaHasta = LocalTime.of(Integer.parseInt((String)jCBHastaHora.getSelectedItem().toString()), Integer.parseInt((String)jCBHastaMinutos.getSelectedItem()));
+        
+    }//GEN-LAST:event_jBImprimirActionPerformed
+
+    private void jCBMetodoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBMetodoItemStateChanged
+        jLTotal.setText("$ "+calcularTotal());
+    }//GEN-LAST:event_jCBMetodoItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
