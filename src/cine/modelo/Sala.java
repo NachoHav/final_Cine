@@ -39,7 +39,7 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Id: " + idSala + "- ubicacion: " + ubicacion;
+        return "ID:" + idSala + " - " + ubicacion;
     }
     
     

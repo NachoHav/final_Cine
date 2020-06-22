@@ -7,9 +7,13 @@ package cine.vista;
 
 import cine.controlador.Conexion;
 import cine.controlador.PeliculaData;
+import cine.controlador.ProyeccionData;
+import cine.controlador.SalaData;
 import cine.modelo.Pelicula;
 import cine.modelo.Proyeccion;
 import cine.modelo.Sala;
+import java.awt.Color;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +22,11 @@ import java.util.ArrayList;
  */
 public class ProyeccionesView extends javax.swing.JInternalFrame {
     private ArrayList<Pelicula> listaPeliculas;
+    private ArrayList<Proyeccion> listaProyecciones;
+    private ArrayList<Sala> listaSalas;
     private PeliculaData peliculaData;
+    private SalaData salaData;
+    private ProyeccionData proyeccionData;
     private Conexion con;
     /**
      * Creates new form ProyeccionesView
@@ -26,8 +34,11 @@ public class ProyeccionesView extends javax.swing.JInternalFrame {
     public ProyeccionesView() {
         initComponents();
         con = new Conexion();
+        proyeccionData = new ProyeccionData(con);
+        salaData = new SalaData(con);
         peliculaData = new PeliculaData(con);
-        cargarPeliculas();
+        cargarDesplegablesHorario();
+        recargar();
     }
 
     /**
@@ -44,19 +55,18 @@ public class ProyeccionesView extends javax.swing.JInternalFrame {
         jCBSalas = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        jCBDesdeHora = new javax.swing.JComboBox<>();
+        jCBDesdeMinutos = new javax.swing.JComboBox<>();
+        jCBHastaMinutos = new javax.swing.JComboBox<>();
+        jCBHastaHora = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jCBProyecciones = new javax.swing.JComboBox<>();
         jBModificar = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
         jBBorrar = new javax.swing.JButton();
-        jBVaciar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jLabel6 = new javax.swing.JLabel();
+        jLAlerta = new javax.swing.JLabel();
         jCBPelicula = new javax.swing.JComboBox<>();
 
         setClosable(true);
@@ -82,14 +92,22 @@ public class ProyeccionesView extends javax.swing.JInternalFrame {
         jBModificar.setText("Modificar");
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jBBorrar.setText("Borrar");
+        jBBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBorrarActionPerformed(evt);
+            }
+        });
 
-        jBVaciar.setText("Vaciar");
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("PLACEHOLDER PARA ALERTAS");
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAlerta.setText("-PLACEHOLDER PARA ALERTAS-");
+        jLAlerta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,23 +120,7 @@ public class ProyeccionesView extends javax.swing.JInternalFrame {
                         .addComponent(jSeparator1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(1, 1, 1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -126,13 +128,32 @@ public class ProyeccionesView extends javax.swing.JInternalFrame {
                                 .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jCBPelicula, 0, 128, Short.MAX_VALUE)
-                                    .addComponent(jCBSalas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jCBSalas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(19, 19, 19)
+                                        .addComponent(jCBHastaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(1, 1, 1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCBDesdeHora, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(jCBHastaMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jCBDesdeMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator2))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2)
+                            .addComponent(jLAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,14 +163,12 @@ public class ProyeccionesView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCBProyecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jBModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(83, 83, 83)
                         .addComponent(jBGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBBorrar)
+                        .addComponent(jBModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBVaciar)))
+                        .addComponent(jBBorrar)))
                 .addGap(0, 58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -172,54 +191,111 @@ public class ProyeccionesView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBDesdeHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBDesdeMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(jCBHastaMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCBHastaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addGap(11, 11, 11)
+                .addComponent(jLAlerta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBModificar)
-                    .addComponent(jBGuardar)
                     .addComponent(jBBorrar)
-                    .addComponent(jBVaciar))
+                    .addComponent(jBGuardar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        Pelicula peliculaAlta = (Pelicula)jCBPelicula.getSelectedItem();
+        Sala salaAlta = (Sala)jCBSalas.getSelectedItem();
+        LocalTime horaDesde = LocalTime.of(Integer.parseInt((String)jCBDesdeHora.getSelectedItem()), Integer.parseInt((String)jCBDesdeMinutos.getSelectedItem()));
+        LocalTime horaHasta = LocalTime.of(Integer.parseInt((String)jCBHastaHora.getSelectedItem().toString()), Integer.parseInt((String)jCBHastaMinutos.getSelectedItem()));
+        
+        Proyeccion proyeccionAlta = new Proyeccion(peliculaAlta,salaAlta, horaDesde, horaHasta);
+        proyeccionData.altaProyeccion(proyeccionAlta);
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
+        int id = ((Proyeccion)jCBProyecciones.getSelectedItem()).getIdProyeccion();
+        Color colorExito = new Color(7, 110, 46);
+        jLAlerta.setText("Proyección eliminada correctamente");
+        jLAlerta.setForeground(colorExito);
+        proyeccionData.bajaProyeccion(id);
+        recargar();
+    }//GEN-LAST:event_jBBorrarActionPerformed
+
+    private void recargar(){
+        jCBProyecciones.removeAllItems();
+        cargarProyecciones();
+        jCBPelicula.removeAllItems();
+        cargarPeliculas();
+        jCBSalas.removeAllItems();
+        cargarSalas();
+    }
+    
     private void cargarPeliculas() 
     {
         listaPeliculas = (ArrayList)peliculaData.obtenerPeliculas();
         for(Pelicula pelicula : listaPeliculas)
             jCBPelicula.addItem(pelicula);
     }
+    
+    private void cargarSalas(){
+        listaSalas = (ArrayList)salaData.obtenerSalas();
+        for(Sala sala : listaSalas)
+           jCBSalas.addItem(sala);
+    }
+    
+    private void cargarProyecciones(){
+        listaProyecciones = (ArrayList)proyeccionData.obtenerProyecciones();
+        for(Proyeccion pro : listaProyecciones)
+           jCBProyecciones.addItem(pro);
+    }
+    
+    private void cargarDesplegablesHorario(){
+        for(int h=0 ; h < 24; h++){
+            if(h==0){
+                jCBDesdeHora.addItem(h+"0");
+                jCBHastaHora.addItem(h+"0");
+            }else if(h==1 || h==2 ||h==3 || h==4 || h==5 || h==6 || h==7 || h==8 || h==9 ){
+                jCBDesdeHora.addItem("0"+h);
+                jCBHastaHora.addItem("0"+h);
+            }else{
+                jCBDesdeHora.addItem(+h+"");
+                jCBHastaHora.addItem(h+"");
+            }
+        }
+        for(int m=0 ; m < 60 ; m+=5){
+            jCBDesdeMinutos.addItem(m+"");
+            jCBHastaMinutos.addItem(m+"");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBorrar;
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBModificar;
-    private javax.swing.JButton jBVaciar;
+    private javax.swing.JComboBox<String> jCBDesdeHora;
+    private javax.swing.JComboBox<String> jCBDesdeMinutos;
+    private javax.swing.JComboBox<String> jCBHastaHora;
+    private javax.swing.JComboBox<String> jCBHastaMinutos;
     private javax.swing.JComboBox<Pelicula> jCBPelicula;
     private javax.swing.JComboBox<Proyeccion> jCBProyecciones;
     private javax.swing.JComboBox<Sala> jCBSalas;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JLabel jLAlerta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables

@@ -67,7 +67,7 @@ public class Proyeccion {
 
     @Override
     public String toString() {
-        return horaDesde + " - " + horaHasta;
+        return "ID:"+idProyeccion +" "+ pelicula.getTitulo() +"(" + horaDesde + " - " + horaHasta+")";
     }
     
     
