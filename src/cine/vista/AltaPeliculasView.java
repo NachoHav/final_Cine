@@ -41,10 +41,8 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jBVaciar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLAlerta = new javax.swing.JLabel();
         jTTituloPelicula = new javax.swing.JTextField();
-        jTIDPelicula = new javax.swing.JTextField();
         jBGuardar = new javax.swing.JButton();
 
         setClosable(true);
@@ -60,9 +58,6 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Título*");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setText("ID*");
-
         jLAlerta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLAlerta.setText(" ");
@@ -75,17 +70,6 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
         jTTituloPelicula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTTituloPeliculajTValidacionTextosKeyTyped(evt);
-            }
-        });
-
-        jTIDPelicula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTIDPeliculaActionPerformed(evt);
-            }
-        });
-        jTIDPelicula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTIDPeliculajTValidacionTextosKeyTyped(evt);
             }
         });
 
@@ -109,13 +93,9 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
                             .addComponent(jSeparator2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTTituloPelicula, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                            .addComponent(jTIDPelicula, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jTTituloPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 69, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -133,15 +113,11 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTTituloPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTIDPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(69, 69, 69)
                 .addComponent(jLAlerta)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,21 +147,8 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTTituloPeliculajTValidacionTextosKeyTyped
 
-    private void jTIDPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTIDPeliculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTIDPeliculaActionPerformed
-
-    private void jTIDPeliculajTValidacionTextosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTIDPeliculajTValidacionTextosKeyTyped
-        char ingreso = evt.getKeyChar();
-        String campo = ((JTextField)evt.getSource()).getText()+ingreso;
-        if(!Character.isAlphabetic(ingreso) || campo.length() > 25){
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTIDPeliculajTValidacionTextosKeyTyped
-
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         String titulo = jTTituloPelicula.getText();
-        long idPelicula =  Long.parseLong(jTIDPelicula.getText());
         Color colorExito = new Color(7, 110, 46);
         Color colorError = new Color(255, 0, 0);
         Pelicula pelicula = new Pelicula(titulo);
@@ -198,17 +161,14 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
 
     private void vaciarTodo(){
         jTTituloPelicula.setText("");
-        jTIDPelicula.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGuardar;
     private javax.swing.JButton jBVaciar;
     private javax.swing.JLabel jLAlerta;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTIDPelicula;
     private javax.swing.JTextField jTTituloPelicula;
     // End of variables declaration//GEN-END:variables
 }
