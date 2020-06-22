@@ -206,6 +206,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu7.add(jMenuItem9);
 
         jMenuItem10.setText("Listar clientes por fecha");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem10);
 
         jMenuItem11.setText("Informe de tickets por fecha");
@@ -378,6 +383,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jEscritorio.add(panelProyecciones);
         jEscritorio.moveToFront(panelProyecciones);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        ClientesXFecha cxf = new ClientesXFecha();
+        cxf.setVisible(true);
+        jEscritorio.add(cxf);
+        jEscritorio.moveToFront(cxf);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
