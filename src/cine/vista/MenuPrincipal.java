@@ -66,11 +66,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jEscritorio.setLayout(jEscritorioLayout);
         jEscritorioLayout.setHorizontalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1012, Short.MAX_VALUE)
+            .addGap(0, 1032, Short.MAX_VALUE)
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 756, Short.MAX_VALUE)
+            .addGap(0, 778, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Archivo");
@@ -237,17 +237,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1032, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
         );
 
         pack();

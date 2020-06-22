@@ -112,8 +112,8 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
         String ubicacion = jtUbicacion.getText();
         int nroButacas = Integer.parseInt(jtNroButacas.getText());
         
-        Sala salaIngresada = new Sala(ubicacion /*,nroButacas*/);
-        salaData.altaSala(salaIngresada);
+        //Sala salaIngresada = new Sala(ubicacion /*,nroButacas*/);
+        //salaData.altaSala(salaIngresada);
         
         vaciarTodo();
     }//GEN-LAST:event_btGuardarActionPerformed
