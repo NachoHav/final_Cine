@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ProyeccionData {
@@ -237,6 +239,32 @@ public class ProyeccionData {
         }
         
         return proyecciones;
+    }
+    
+    public List<LocalDate> obtenerHorariosDesde(){
+        
+        List<LocalDate> horarios = new ArrayList<>();
+        
+        try {        
+            String sql = "SELECT DISTINCT horario_desde FROM proyeccion;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            Proyeccion proyeccion;
+            SalaData salaData = new SalaData(con2);
+            
+            while(rs.next()){
+                proyeccion = new Proyeccion();
+                proyeccion.setHoraDesde(rs.getTime("horario_desde").toLocalTime());
+                
+                horarios.add(proyeccion);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("No se pudo obtener lista de horarios! " + ex.getMessage());
+        }
+        
     }
        
 }
