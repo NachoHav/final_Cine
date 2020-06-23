@@ -160,6 +160,7 @@ public class TicketData
         List<Ticket> ticketsXFecha = new ArrayList<Ticket>();
         ClienteData cd = new ClienteData(con2);
         ProyeccionData pd = new ProyeccionData(con2);
+        ButacaData bd = new ButacaData(con2);
     
         try 
         {
@@ -178,6 +179,7 @@ public class TicketData
                 ticket.setIdTicket(resultSet.getInt("idTicket"));
                 ticket.setCliente(cd.buscarcliente(resultSet.getInt("idCliente")));
                 ticket.setProyeccion(pd.buscarProyeccion(resultSet.getInt("idProyeccion")));
+                ticket.setButaca(bd.obtenerButaca(resultSet.getInt("idButaca")));
                 ticket.setFecha_ticket(resultSet.getDate("fecha_ticket").toLocalDate());
                 ticket.setMonto(resultSet.getDouble("monto"));
                 ticket.setMetodo_pago(resultSet.getString("metodo_pago"));
@@ -203,7 +205,7 @@ public class TicketData
     
         try 
         {
-            String query = "SELECT * FROM ticket WHERE idPelicula =" + idPelicula +";";
+            String query = "SELECT ticket.* FROM ticket JOIN proyeccion ON ticket.idProyeccion = proyeccion.idProyeccion WHERE proyeccion.idPelicula =" + idPelicula +";";
             PreparedStatement statement = con.prepareStatement(query);
             
             ResultSet resultSet = statement.executeQuery();

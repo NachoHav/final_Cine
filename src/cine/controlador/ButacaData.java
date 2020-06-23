@@ -8,9 +8,11 @@ import java.sql.*;
 
 public class ButacaData {
     private Connection con;
+    private Conexion con2;
     
     public ButacaData(Conexion conexion){
         con = conexion.getConexion();
+        con2 = conexion;
     }
     
     public ButacaData(){}
@@ -69,6 +71,38 @@ public class ButacaData {
         } 
         
         return encontrado;
+    }
+    
+    public Butaca obtenerButaca(int idButaca){
+        Butaca butaca = null;
+        ProyeccionData pd = new ProyeccionData(con2);
+        
+        try 
+        {
+            String query = "SELECT * FROM butaca WHERE idButaca = ?";
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,idButaca);           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            butaca = new Butaca();
+            
+            while(resultSet.next())
+            {
+                butaca.setIdButaca(resultSet.getInt("idButaca"));
+                butaca.setProyeccion(pd.buscarProyeccion(resultSet.getInt("idProyeccion")));
+                butaca.setFila("fila");
+                butaca.setColumna("columna");
+            }      
+            statement.close();   
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println("ERROR: Consulta de butaca: " + ex.getMessage());
+        }
+        
+        return butaca;
     }
     
 }
