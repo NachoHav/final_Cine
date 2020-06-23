@@ -140,11 +140,13 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTTituloPeliculaActionPerformed
 
     private void jTTituloPeliculajTValidacionTextosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTituloPeliculajTValidacionTextosKeyTyped
-        char ingreso = evt.getKeyChar();
+        /*char ingreso = evt.getKeyChar();
         String campo = ((JTextField)evt.getSource()).getText()+ingreso;
         if(!Character.isAlphabetic(ingreso) || campo.length() > 25){
             evt.consume();
-        }
+        }*/
+        
+        //ESTO NO HACIA FALTA
     }//GEN-LAST:event_jTTituloPeliculajTValidacionTextosKeyTyped
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed

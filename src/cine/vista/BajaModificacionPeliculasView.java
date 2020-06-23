@@ -222,11 +222,11 @@ public class BajaModificacionPeliculasView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTTituloPeliculaActionPerformed
 
     private void jTTituloPeliculajTValidacionNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTTituloPeliculajTValidacionNombresKeyTyped
-        char ingreso = evt.getKeyChar();
+        /*char ingreso = evt.getKeyChar();
         String campo = ((JTextField)evt.getSource()).getText()+ingreso;
         if(!Character.isAlphabetic(ingreso) || campo.length() > 25){
             evt.consume();
-        }
+        }*/
     }//GEN-LAST:event_jTTituloPeliculajTValidacionNombresKeyTyped
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
