@@ -8,6 +8,7 @@ import cine.controlador.SalaData;
 import cine.modelo.Pelicula;
 import cine.modelo.Proyeccion;
 import cine.modelo.Sala;
+import java.awt.Color;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -41,23 +42,13 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
    
     
     private void cargarDesplegableHorarios(){
-//        for(Proyeccion proy: listaProyecciones){    
-//            for(Proyeccion p2: listaProyecciones){
-//                int a = p2.getHoraDesde().getHour();
-//                int a2 = p2.getHoraDesde().getMinute();
-//                int b = proy.getHoraDesde().getHour();
-//                int b2 = proy.getHoraDesde().getMinute();
-//                
-//                if(a == b){
-//                    if(a2 == b2){
-//                        if(proy.getSala().getIdSala() != p2.getSala().getIdSala()){
-//                            jcbHorarios.addItem((proy.getHoraDesde().getHour())+":"+proy.getHoraDesde().getMinute());
-//                        }
-//                    }
-//                }
-//            }
-//           
-//        }
+        ArrayList<LocalTime> horariosDesde = proyeccionData.obtenerHorariosDesde();
+        //ArrayList<LocalTime> horariosHasta = proyeccionData.obtenerHorariosHasta();
+        
+        for(LocalTime desde : horariosDesde){
+            jcbHorarios.addItem(desde);
+        }
+        
     }
     
     
@@ -65,14 +56,14 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jtTituloPelicula = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
-        jcbSalas = new javax.swing.JComboBox<Sala>();
-        jcbHorarios = new javax.swing.JComboBox<String>();
+        jcbSalas = new javax.swing.JComboBox<>();
+        jcbHorarios = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jTAlerta = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -80,19 +71,11 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Peliculas por Sala y Horario");
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setText("Peliculas por Sala y Horario");
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Sala");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Horario");
-
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel4.setText("Pelicula");
-
-        jtTituloPelicula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +90,10 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
             }
         });
 
+        jTAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTAlerta.setLabelFor(jbBuscar);
+        jTAlerta.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,47 +101,50 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcbSalas, 0, 107, Short.MAX_VALUE)
-                                    .addComponent(jcbHorarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbBuscar)
-                            .addComponent(jLabel4)))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbSalas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(jtTituloPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jTAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jbBuscar)
+                .addGap(195, 195, 195))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(58, 58, 58)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbSalas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                    .addComponent(jcbSalas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jcbHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jbBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jtTituloPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTAlerta)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -165,23 +155,32 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbHorariosActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-       Sala idSala = (Sala) jcbSalas.getSelectedItem();
-       Proyeccion hora = (Proyeccion) jcbHorarios.getSelectedItem();
+       Sala idSala = (Sala)jcbSalas.getSelectedItem();
+       LocalTime hora = (LocalTime)jcbHorarios.getSelectedItem();
        
-       Proyeccion pelicula = proyeccionData.buscarProyeccionXSalaYHorario(idSala.getIdSala(), hora.getHoraDesde());
+       Proyeccion proyeccion = proyeccionData.buscarProyeccionXSalaYHorario(idSala.getIdSala(), hora);
        
-       jtTituloPelicula.setText(pelicula.getPelicula().getTitulo());
+       Color colorExito = new Color(7, 110, 46);
+       Color colorError = new Color(255, 0, 0);
+       
+       if(proyeccion.getIdProyeccion() != -1){
+           jTAlerta.setText("En la sala/horario seleccionado se proyectará la pelicula: "+proyeccion.getPelicula().getTitulo());
+           jTAlerta.setForeground(colorExito);
+       }else{
+           jTAlerta.setText("No se encontró ninguna pelicula para la sala y horario seleccionados.");
+           jTAlerta.setForeground(colorError);
+       }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel jTAlerta;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JComboBox<String> jcbHorarios;
+    private javax.swing.JComboBox<LocalTime> jcbHorarios;
     private javax.swing.JComboBox<Sala> jcbSalas;
-    private javax.swing.JTextField jtTituloPelicula;
     // End of variables declaration//GEN-END:variables
 }

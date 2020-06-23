@@ -241,9 +241,9 @@ public class ProyeccionData {
         return proyecciones;
     }
     
-    public List<LocalTime> obtenerHorariosDesde(){
+    public ArrayList<LocalTime> obtenerHorariosDesde(){
         
-        List<LocalTime> horarios = new ArrayList<>();
+        ArrayList<LocalTime> horarios = new ArrayList<>();
         
         try {        
             String sql = "SELECT DISTINCT horario_desde FROM proyeccion;";
@@ -262,9 +262,9 @@ public class ProyeccionData {
         return horarios;
     }
     
-    public List<LocalTime> obtenerHorariosHasta(){
+    public ArrayList<LocalTime> obtenerHorariosHasta(){
         
-        List<LocalTime> horarios = new ArrayList<>();
+        ArrayList<LocalTime> horarios = new ArrayList<>();
         
         try {        
             String sql = "SELECT DISTINCT horario_hasta FROM proyeccion;";
