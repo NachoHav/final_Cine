@@ -223,7 +223,7 @@ public class TicketsXFecha extends javax.swing.JInternalFrame {
         boolean bisiesto = año % 4 == 0;
         int diasMes = 0;
         
-        if(mes == 3 || mes == 6 || mes == 9 || mes == 11){
+        if(mes == 3 || mes == 4 || mes == 6 || mes == 9 || mes == 11){
             diasMes = 30;
         }else if(mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12){
             diasMes = 31;
