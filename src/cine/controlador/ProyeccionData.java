@@ -241,9 +241,9 @@ public class ProyeccionData {
         return proyecciones;
     }
     
-    public List<LocalDate> obtenerHorariosDesde(){
+    public List<LocalTime> obtenerHorariosDesde(){
         
-        List<LocalDate> horarios = new ArrayList<>();
+        List<LocalTime> horarios = new ArrayList<>();
         
         try {        
             String sql = "SELECT DISTINCT horario_desde FROM proyeccion;";
@@ -251,20 +251,36 @@ public class ProyeccionData {
             
             ResultSet rs = ps.executeQuery();
             
-            Proyeccion proyeccion;
-            SalaData salaData = new SalaData(con2);
-            
             while(rs.next()){
-                proyeccion = new Proyeccion();
-                proyeccion.setHoraDesde(rs.getTime("horario_desde").toLocalTime());
-                
-                horarios.add(proyeccion);
+                horarios.add(rs.getTime("horario_desde").toLocalTime());
             }
             
         } catch (SQLException ex) {
             System.out.println("No se pudo obtener lista de horarios! " + ex.getMessage());
         }
         
+        return horarios;
+    }
+    
+    public List<LocalTime> obtenerHorariosHasta(){
+        
+        List<LocalTime> horarios = new ArrayList<>();
+        
+        try {        
+            String sql = "SELECT DISTINCT horario_hasta FROM proyeccion;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                horarios.add(rs.getTime("horario_hasta").toLocalTime());
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("No se pudo obtener lista de horarios! " + ex.getMessage());
+        }
+        
+        return horarios;
     }
        
 }
