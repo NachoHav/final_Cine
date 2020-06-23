@@ -4,6 +4,7 @@ package cine.vista;
 import cine.controlador.Conexion;
 import cine.controlador.SalaData;
 import cine.modelo.Sala;
+import java.awt.Color;
 
 
 public class AltaSalasView extends javax.swing.JInternalFrame {
@@ -29,6 +30,7 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
         btVaciar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jTAlerta = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -66,6 +68,9 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
             }
         });
 
+        jTAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jTAlerta.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,9 +91,10 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
                         .addGap(0, 81, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator1))))
+                        .addComponent(jSeparator1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator2)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -96,6 +102,10 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btVaciar)
                 .addGap(156, 156, 156))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTAlerta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,9 +120,11 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtNroButacas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(2, 2, 2)
+                .addComponent(jTAlerta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
                     .addComponent(btVaciar))
@@ -134,10 +146,21 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
     
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         String ubicacion = jtUbicacion.getText();
-        int nroButacas = Integer.parseInt(jtNroButacas.getText());
+        int nroButacas = (jtNroButacas.getText().isEmpty()) ? 0 : Integer.parseInt(jtNroButacas.getText());
         
-        Sala salaIngresada = new Sala(ubicacion ,nroButacas);
-        salaData.altaSala(salaIngresada);
+        Color colorExito = new Color(7, 110, 46);
+        Color colorError = new Color(255, 0, 0);
+         
+        if(!jtUbicacion.getText().equals("") && nroButacas != 0){
+            Sala salaIngresada = new Sala(ubicacion ,nroButacas);
+            salaData.altaSala(salaIngresada);
+            jTAlerta.setText("Sala creada correctamente.");
+            jTAlerta.setForeground(colorExito);
+        }else{
+            jTAlerta.setText("No se puede crear la sala, hay campos vacios.");
+            jTAlerta.setForeground(colorError);
+        }
+        
         
         vaciarTodo();
     }//GEN-LAST:event_btGuardarActionPerformed
@@ -163,6 +186,7 @@ public class AltaSalasView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel jTAlerta;
     private javax.swing.JTextField jtNroButacas;
     private javax.swing.JTextField jtUbicacion;
     // End of variables declaration//GEN-END:variables

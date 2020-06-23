@@ -204,10 +204,10 @@ public class AltaClientesView extends javax.swing.JInternalFrame {
             jLAlerta.setText("Creado el cliente "+clienteIngresado.getApellido()+" "+clienteIngresado.getNombre()+" correctamente.");
             jLAlerta.setForeground(colorExito);
             vaciarTodo();
+        }else{
+            jLAlerta.setText("No se puede crear el cliente, hay campos vacios.");
+            jLAlerta.setForeground(colorError);
         }
-        
-        jLAlerta.setText("No se puede crear el cliente, hay campos vacios.");
-        jLAlerta.setForeground(colorError);
         
     }//GEN-LAST:event_jBGuardarActionPerformed
     private void vaciarTodo(){
