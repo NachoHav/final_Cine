@@ -166,7 +166,7 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
         jLTotal.setText("$0");
 
         jLAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLAlerta.setText("-PLACEHOLDER ALERTAS-");
+        jLAlerta.setText(" ");
 
         jBImprimir.setText("Imprimir");
         jBImprimir.addActionListener(new java.awt.event.ActionListener() {

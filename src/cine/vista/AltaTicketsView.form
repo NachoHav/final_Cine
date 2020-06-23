@@ -247,7 +247,7 @@
     <Component class="javax.swing.JLabel" name="jLAlerta">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="-PLACEHOLDER ALERTAS-"/>
+        <Property name="text" type="java.lang.String" value="&#xa0;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">

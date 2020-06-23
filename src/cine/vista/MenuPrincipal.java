@@ -5,6 +5,16 @@
  */
 package cine.vista;
 
+import cine.controlador.ClienteData;
+import cine.controlador.Conexion;
+import cine.controlador.ProyeccionData;
+import cine.controlador.SalaData;
+import cine.modelo.Cliente;
+import cine.modelo.Proyeccion;
+import cine.modelo.Sala;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nacho
@@ -312,12 +322,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         //ALTA DE TICKETS
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
-        AltaTicketsView PanelGeneracionTicket = new AltaTicketsView();
-        PanelGeneracionTicket.setVisible(true);
-        jEscritorio.add(PanelGeneracionTicket);
-        jEscritorio.moveToFront(PanelGeneracionTicket);
+        Conexion con = new Conexion();
+        ArrayList<Cliente> listaClientes;
+        ArrayList<Sala> listaSalas;
+        ArrayList<Proyeccion> listaProyecciones;
+        
+        ClienteData clienteData = new ClienteData(con);
+        SalaData salaData = new SalaData(con);
+        ProyeccionData proyeccionData = new ProyeccionData(con);
+        
+        listaClientes=(ArrayList)clienteData.obtenerClientes();
+        listaSalas=(ArrayList)salaData.obtenerSalas();
+        listaProyecciones=(ArrayList)proyeccionData.obtenerProyecciones();
+        
+        if(listaClientes.isEmpty() || listaClientes.isEmpty() || listaClientes.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Esta ventana no se puede abrir si no hay clientes, salas y proyecciones creadas.","Error al cargar la ventana",JOptionPane.ERROR_MESSAGE);
+        }else{
+            jEscritorio.removeAll();
+            jEscritorio.repaint();
+            AltaTicketsView PanelGeneracionTicket = new AltaTicketsView();
+            PanelGeneracionTicket.setVisible(true);
+            jEscritorio.add(PanelGeneracionTicket);
+            jEscritorio.moveToFront(PanelGeneracionTicket);
+        }
+        
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
