@@ -41,9 +41,23 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
    
     
     private void cargarDesplegableHorarios(){
-        for(Proyeccion proy: listaProyecciones){
-            jcbHorarios.addItem(proy);
-        }
+//        for(Proyeccion proy: listaProyecciones){    
+//            for(Proyeccion p2: listaProyecciones){
+//                int a = p2.getHoraDesde().getHour();
+//                int a2 = p2.getHoraDesde().getMinute();
+//                int b = proy.getHoraDesde().getHour();
+//                int b2 = proy.getHoraDesde().getMinute();
+//                
+//                if(a == b){
+//                    if(a2 == b2){
+//                        if(proy.getSala().getIdSala() != p2.getSala().getIdSala()){
+//                            jcbHorarios.addItem((proy.getHoraDesde().getHour())+":"+proy.getHoraDesde().getMinute());
+//                        }
+//                    }
+//                }
+//            }
+//           
+//        }
     }
     
     
@@ -58,7 +72,7 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
         jtTituloPelicula = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
         jcbSalas = new javax.swing.JComboBox<Sala>();
-        jcbHorarios = new javax.swing.JComboBox<Proyeccion>();
+        jcbHorarios = new javax.swing.JComboBox<String>();
 
         setClosable(true);
         setIconifiable(true);
@@ -166,7 +180,7 @@ public class PeliculaXSalaYHorarioView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JComboBox<Proyeccion> jcbHorarios;
+    private javax.swing.JComboBox<String> jcbHorarios;
     private javax.swing.JComboBox<Sala> jcbSalas;
     private javax.swing.JTextField jtTituloPelicula;
     // End of variables declaration//GEN-END:variables

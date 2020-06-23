@@ -26,7 +26,6 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
     public BajaModificacionSalasView() {
         initComponents();
         
-        try {
             con = new Conexion();
             
             salaData = new SalaData(con);
@@ -34,8 +33,7 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
             
             CargarDesplegableSalas();
             
-        } catch (Exception e) {
-        }
+
 
     }
 
@@ -49,7 +47,7 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jCSalas = new javax.swing.JComboBox<>();
+        jCSalas = new javax.swing.JComboBox<Sala>();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -85,6 +83,12 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("Salas");
+
+        jCSalas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCSalasActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -175,7 +179,7 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
                             .addComponent(jtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtNroButacas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addGap(24, 24, 24)
@@ -216,6 +220,12 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
         Limpiar();
         CargarDesplegableSalas();   
     }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void jCSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCSalasActionPerformed
+        Sala salaBut = (Sala) jCSalas.getSelectedItem();
+        jtNroButacas.setText(salaBut.getCantButacas() + "");
+        jtUbicacion.setText(salaBut.getUbicacion());
+    }//GEN-LAST:event_jCSalasActionPerformed
 
     
     private void Limpiar()
