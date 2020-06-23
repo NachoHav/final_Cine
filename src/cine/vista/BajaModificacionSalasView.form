@@ -194,6 +194,9 @@
     <Component class="javax.swing.JTextField" name="jtUbicacion">
     </Component>
     <Component class="javax.swing.JTextField" name="jtNroButacas">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtNroButacasKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btModificar">
       <Properties>

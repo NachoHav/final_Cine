@@ -98,6 +98,12 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setText("Nro Butacas");
 
+        jtNroButacas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNroButacasKeyTyped(evt);
+            }
+        });
+
         btModificar.setText("Modificar");
         btModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +232,14 @@ public class BajaModificacionSalasView extends javax.swing.JInternalFrame {
         jtNroButacas.setText(salaBut.getCantButacas() + "");
         jtUbicacion.setText(salaBut.getUbicacion());
     }//GEN-LAST:event_jCSalasActionPerformed
+
+    private void jtNroButacasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNroButacasKeyTyped
+        char ingreso = evt.getKeyChar();
+        String campo = jtNroButacas.getText()+ingreso;
+        if(!Character.isDigit(ingreso) || campo.length() > 4){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNroButacasKeyTyped
 
     
     private void Limpiar()
