@@ -192,17 +192,23 @@ public class AltaClientesView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTDniClienteActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        String nombre = jTNombreCliente.getText();
-        String apellido = jTApellidoCliente.getText();
-        long dni =  Long.parseLong(jTDniCliente.getText());
-        Color colorExito = new Color(7, 110, 46);
-        Color colorError = new Color(255, 0, 0);
-        Cliente clienteIngresado = new Cliente(dni,nombre,apellido);
-        clienteData.altaCliente(clienteIngresado);
-        jLAlerta.setText("Creado el cliente "+clienteIngresado.getApellido()+" "+clienteIngresado.getNombre()+" correctamente");
-        jLAlerta.setForeground(colorExito);
+         Color colorExito = new Color(7, 110, 46);
+         Color colorError = new Color(255, 0, 0);
+         
+        if(!jTNombreCliente.getText().equals("") && !jTApellidoCliente.getText().equals("") && !jTDniCliente.getText().equals("")){
+            String nombre = jTNombreCliente.getText();
+            String apellido = jTApellidoCliente.getText();
+            long dni =  Long.parseLong(jTDniCliente.getText());
+            Cliente clienteIngresado = new Cliente(dni,nombre,apellido);
+            clienteData.altaCliente(clienteIngresado);
+            jLAlerta.setText("Creado el cliente "+clienteIngresado.getApellido()+" "+clienteIngresado.getNombre()+" correctamente.");
+            jLAlerta.setForeground(colorExito);
+            vaciarTodo();
+        }
         
-        vaciarTodo();
+        jLAlerta.setText("No se puede crear el cliente, hay campos vacios.");
+        jLAlerta.setForeground(colorError);
+        
     }//GEN-LAST:event_jBGuardarActionPerformed
     private void vaciarTodo(){
         jTNombreCliente.setText("");
