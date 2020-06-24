@@ -77,6 +77,12 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Baja y Modificacion de Tickets");
 
+        jCTickets.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCTicketsItemStateChanged(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setText("Buscar tickets:");
 
@@ -101,7 +107,7 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
         });
 
         jLAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLAlerta.setText("-PLACEHOLDER ALERTAS-");
+        jLAlerta.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,12 +192,13 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
             int id = idTicket;
             Cliente cliente = (Cliente)jCClientes.getSelectedItem();
             double monto = Double.parseDouble(jTMonto.getText());
-            //System.out.println(ticketSeleccionado.getProyeccion().getPelicula().getTitulo());
             Ticket ticketActualizado = new Ticket(cliente,ticketSeleccionado.getProyeccion(),ticketSeleccionado.getButaca(),ticketSeleccionado.getFecha_ticket(), monto, true, ticketSeleccionado.getMetodo_pago());
-            //System.out.println(ticketActualizado.getButaca().getIdButaca());
             ticketActualizado.setIdTicket(id);
             ticketData.modificarTicket(ticketActualizado);
             
+            Color colorExito = new Color(7, 110, 46);
+            jLAlerta.setText("Ticket "+ ((Ticket)jCTickets.getSelectedItem()).getIdTicket() +" modificado correctamente");
+            jLAlerta.setForeground(colorExito);
             cargarDesplegableTickets();
         }
     }//GEN-LAST:event_jBModificarActionPerformed
@@ -203,6 +210,11 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
         jLAlerta.setForeground(colorExito);
         ticketData.bajaTicket(idTicket);
     }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jCTicketsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCTicketsItemStateChanged
+        jTMonto.setText(""+((Ticket)jCTickets.getSelectedItem()).getMonto());
+        //jCClientes.setSelectedIndex(WIDTH);
+    }//GEN-LAST:event_jCTicketsItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -117,6 +117,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCTicketsItemStateChanged"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Ticket&gt;"/>
       </AuxValues>
@@ -182,7 +185,7 @@
     <Component class="javax.swing.JLabel" name="jLAlerta">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="-PLACEHOLDER ALERTAS-"/>
+        <Property name="text" type="java.lang.String" value="&#xa0;"/>
       </Properties>
     </Component>
   </SubComponents>

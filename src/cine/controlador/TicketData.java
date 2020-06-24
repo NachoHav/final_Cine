@@ -239,6 +239,7 @@ public class TicketData
         List<Ticket> tickets = new ArrayList<>();
         ClienteData cd = new ClienteData(con2);
         ProyeccionData pd = new ProyeccionData(con2);
+        ButacaData bd = new ButacaData(con2);
         
         try {
             String sql = "SELECT * FROM ticket;";
@@ -253,6 +254,7 @@ public class TicketData
                 ticket = new Ticket();
                 ticket.setIdTicket(resultSet.getInt("idTicket"));
                 ticket.setCliente(cd.buscarcliente(resultSet.getInt("idCliente")));
+                ticket.setButaca(bd.obtenerButaca(resultSet.getInt("idButaca")));
                 ticket.setProyeccion(pd.buscarProyeccion(resultSet.getInt("idProyeccion")));
                 ticket.setFecha_ticket(resultSet.getDate("fecha_ticket").toLocalDate());
                 ticket.setMonto(resultSet.getDouble("monto"));
