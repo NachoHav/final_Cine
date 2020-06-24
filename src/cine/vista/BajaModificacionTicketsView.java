@@ -12,6 +12,7 @@ import cine.modelo.Cliente;
 import cine.modelo.Ticket;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JTextField;
 
 /**
  *
@@ -91,6 +92,12 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Monto:");
+
+        jTMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTMontoKeyTyped(evt);
+            }
+        });
 
         jBEliminar.setText("Eliminar");
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +206,6 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
             Color colorExito = new Color(7, 110, 46);
             jLAlerta.setText("Ticket "+ ((Ticket)jCTickets.getSelectedItem()).getIdTicket() +" modificado correctamente");
             jLAlerta.setForeground(colorExito);
-            cargarDesplegableTickets();
         }
     }//GEN-LAST:event_jBModificarActionPerformed
 
@@ -209,12 +215,32 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
         jLAlerta.setText("Ticket "+ ((Ticket)jCTickets.getSelectedItem()).getIdTicket() +" eliminado correctamente");
         jLAlerta.setForeground(colorExito);
         ticketData.bajaTicket(idTicket);
+        jTMonto.setText("");
+        cargarDesplegableTickets();
+        cargarDesplegableClientes();
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jCTicketsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCTicketsItemStateChanged
         jTMonto.setText(""+((Ticket)jCTickets.getSelectedItem()).getMonto());
-        //jCClientes.setSelectedIndex(WIDTH);
+        
+        Ticket seleccionado = (Ticket)jCTickets.getSelectedItem();
+        
+        if(seleccionado == null)
+            return;
+        for(int i = 0; i < jCClientes.getItemCount(); i++){
+            if(((Cliente)jCClientes.getItemAt(i)).getIdCliente() == (seleccionado.getCliente().getIdCliente())){
+                jCClientes.setSelectedIndex(i);
+            }
+        }
     }//GEN-LAST:event_jCTicketsItemStateChanged
+
+    private void jTMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTMontoKeyTyped
+        char ingreso = evt.getKeyChar();
+        String campo = ((JTextField)evt.getSource()).getText()+ingreso;
+        if(!Character.isDigit(ingreso) || campo.length() > 5){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTMontoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -295,7 +295,7 @@ public class AltaTicketsView extends javax.swing.JInternalFrame {
             Butaca alta = new Butaca(proyeccion, fila, columna);
             butacaData.altaButaca(alta);
             String metodoPago = (String)jCBMetodo.getSelectedItem();
-            Ticket ticketNuevo = new Ticket(cliente, proyeccion, alta, LocalDate.now(), 30, true, metodoPago);
+            Ticket ticketNuevo = new Ticket(cliente, proyeccion, alta, LocalDate.now(), total, true, metodoPago);
             ticketData.generarTicket(ticketNuevo);
             recargarTodo();
         }

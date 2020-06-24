@@ -35,7 +35,7 @@ public class TicketsXPelicula extends javax.swing.JInternalFrame {
         cargarCbPeliculas();
         armarCabeceraTabla();
         //borrarFilasTabla();
-        //cargarDatosTabla();
+        cargarDatosTabla();
         
     }
 
