@@ -336,7 +336,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         listaSalas=(ArrayList)salaData.obtenerSalas();
         listaProyecciones=(ArrayList)proyeccionData.obtenerProyecciones();
         
-        if(listaClientes.isEmpty() || listaClientes.isEmpty() || listaClientes.isEmpty()){
+        if(listaClientes.isEmpty() || listaSalas.isEmpty() || listaProyecciones.isEmpty()){
             JOptionPane.showMessageDialog(null, "Esta ventana no se puede abrir si no hay clientes, salas y proyecciones creadas.","Error al cargar la ventana",JOptionPane.ERROR_MESSAGE);
         }else{
             jEscritorio.removeAll();

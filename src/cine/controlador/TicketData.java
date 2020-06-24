@@ -268,4 +268,21 @@ public class TicketData
         
         return tickets;
     }
+    
+    public void bajaTicket(int id){
+        
+        try {
+            String sql = "DELETE FROM ticket WHERE idTicket = ?;";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ps.executeUpdate();
+            ps.close();
+            
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al dar de baja al ticket. " + ex.getMessage());
+        }
+    }
 }

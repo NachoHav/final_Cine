@@ -5,19 +5,53 @@
  */
 package cine.vista;
 
+import cine.controlador.ClienteData;
+import cine.controlador.Conexion;
+import cine.controlador.TicketData;
+import cine.modelo.Cliente;
+import cine.modelo.Ticket;
+import java.awt.Color;
+import java.util.ArrayList;
+
 /**
  *
  * @author Arezlon
  */
 public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
-
+    private ClienteData clienteData;
+    private TicketData ticketData;
+    private Conexion con;
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Ticket> listaTickets;
     /**
      * Creates new form BajaModificacionTicketsView
      */
     public BajaModificacionTicketsView() {
         initComponents();
+        con = new Conexion();
+        clienteData = new ClienteData(con);
+        ticketData = new TicketData(con);
+        
+        cargarDesplegableTickets();
+        cargarDesplegableClientes();
     }
 
+    private void cargarDesplegableClientes(){
+        jCClientes.removeAllItems();
+        listaClientes=(ArrayList)clienteData.obtenerClientes();
+        for (Cliente c:listaClientes) {
+            jCClientes.addItem(c);
+        }
+    }
+    
+    private void cargarDesplegableTickets(){
+        jCClientes.removeAllItems();
+        listaTickets=(ArrayList)ticketData.obtenerTickets();
+        for (Ticket t:listaTickets) {
+            jCTickets.addItem(t);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,24 +61,162 @@ public class BajaModificacionTicketsView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCTickets = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jCClientes = new javax.swing.JComboBox<>();
+        jTMonto = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
+        jBEliminar = new javax.swing.JButton();
+        jBModificar = new javax.swing.JButton();
+        jLAlerta = new javax.swing.JLabel();
+
         setClosable(true);
         setTitle("Baja y Modificacion de Tickets");
+
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel1.setText("Buscar tickets:");
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setText("Cliente:");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setText("Monto:");
+
+        jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
+
+        jBModificar.setText("Modificar");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
+
+        jLAlerta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLAlerta.setText("-PLACEHOLDER ALERTAS-");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(15, 15, 15)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jTMonto)
+                                    .addComponent(jCClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(145, 145, 145)
+                                .addComponent(jBModificar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBEliminar)))
+                        .addGap(0, 109, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLAlerta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCTickets, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(6, 6, 6)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCTickets, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jCClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLAlerta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBEliminar)
+                    .addComponent(jBModificar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        int idTicket = ((Ticket)jCTickets.getSelectedItem()).getIdTicket();
+        Ticket ticketSeleccionado = ((Ticket)jCTickets.getSelectedItem());
+        
+        if(idTicket > 0)
+        {
+            int id = idTicket;
+            Cliente cliente = (Cliente)jCClientes.getSelectedItem();
+            double monto = Double.parseDouble(jTMonto.getText());
+            //System.out.println(ticketSeleccionado.getProyeccion().getPelicula().getTitulo());
+            Ticket ticketActualizado = new Ticket(cliente,ticketSeleccionado.getProyeccion(),ticketSeleccionado.getButaca(),ticketSeleccionado.getFecha_ticket(), monto, true, ticketSeleccionado.getMetodo_pago());
+            //System.out.println(ticketActualizado.getButaca().getIdButaca());
+            ticketActualizado.setIdTicket(id);
+            ticketData.modificarTicket(ticketActualizado);
+            
+            cargarDesplegableTickets();
+        }
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        int idTicket = ((Ticket)jCTickets.getSelectedItem()).getIdTicket();
+        Color colorExito = new Color(7, 110, 46);
+        jLAlerta.setText("Ticket "+ ((Ticket)jCTickets.getSelectedItem()).getIdTicket() +" eliminado correctamente");
+        jLAlerta.setForeground(colorExito);
+        ticketData.bajaTicket(idTicket);
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBModificar;
+    private javax.swing.JComboBox<Cliente> jCClientes;
+    private javax.swing.JComboBox<Ticket> jCTickets;
+    private javax.swing.JLabel jLAlerta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTextField jTMonto;
     // End of variables declaration//GEN-END:variables
 }

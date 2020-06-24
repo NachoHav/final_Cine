@@ -93,6 +93,11 @@ public class Ticket {
         this.metodo_pago = metodo_pago;
     }
     
+    @Override
+    public String toString() {
+        return "ID:" + idTicket + " - " + fecha_ticket + " - " + proyeccion.getPelicula().getTitulo();
+    }
+    
     
     
 
