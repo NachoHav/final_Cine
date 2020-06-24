@@ -159,10 +159,17 @@ public class AltaPeliculasView extends javax.swing.JInternalFrame {
         String titulo = jTTituloPelicula.getText();
         Color colorExito = new Color(7, 110, 46);
         Color colorError = new Color(255, 0, 0);
-        Pelicula pelicula = new Pelicula(titulo);
-        peliculaData.altaPelicula(pelicula);
-        jLAlerta.setText("Creada la película "+pelicula.getTitulo()+" correctamente");
-        jLAlerta.setForeground(colorExito);
+        
+        if(!titulo.equals("")){
+            Pelicula pelicula = new Pelicula(titulo);
+            peliculaData.altaPelicula(pelicula);
+            jLAlerta.setText("Creada la película "+pelicula.getTitulo()+" correctamente");
+            jLAlerta.setForeground(colorExito);
+        }else{
+            jLAlerta.setText("Error al crear la película, hay campos vacios.");
+            jLAlerta.setForeground(colorError);
+        }
+        
         
         vaciarTodo();
     }//GEN-LAST:event_jBGuardarActionPerformed
